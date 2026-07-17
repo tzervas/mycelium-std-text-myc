@@ -1,0 +1,333 @@
+{
+  "source": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/error.rs",
+  "emitted_items": [
+    "Utf8Error",
+    "BoundaryError",
+    "ParseErr",
+    "EncodeError",
+    "TranscodeError"
+  ],
+  "gaps": [
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/error.rs",
+      "line": 25,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use std :: fmt ;",
+      "reason": "`use std::fmt` — `std` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/error.rs",
+      "line": 29,
+      "col": 1,
+      "category": "NamedFieldDrop",
+      "rust_construct": "NamedFieldDrop",
+      "snippet": "# [doc = \" An invalid UTF-8 byte sequence was found at a known byte index.\"] # [doc = \"\"] # [doc = \" Produced by [`crate::from_utf8`] when the input bytes are not valid UTF-8.\"] # [doc = \"\"] # [doc = \" # C1 compliance\"] # [doc = \" The error is an explicit `Err(Utf8Error::Invalid { byte, reason })` — **never** a silent\"] # [doc = \" U+FFFD replacement-character substitution (RFC-0016 §4.1 C1; G2 \\\"never-silent\\\"). A caller\"] # [doc = \" who wants U+FFFD substitution must use a distinct, explicitly-named `*_lossy` variant\"] # [doc = \" (unavailable here — see spec §2 scope; `from_utf8` is the strict op).\"] # [doc = \"\"] # [doc = \" # C3 compliance\"] # [doc = \" The `byte` index names **where** the invalid byte is, so the caller can locate it in the\"] # [doc = \" input (the EXPLAIN artifact — RFC-0013 §4.1 I1 \\\"additive and still propagating\\\").\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum Utf8Error { # [doc = \" The byte at index `byte` is not valid UTF-8.\"] # [doc = \"\"] # [doc = \" `reason` is a short human-readable description of why the byte is invalid (C3 / G11).\"] Invalid { # [doc = \" The byte index at which the invalid byte was found.\"] byte : usize , # [doc = \" A short human-readable reason (G11 dual projection; RFC-0013 §4.1).\"] reason : & 'static str , } , }",
+      "reason": "enum `Utf8Error` variant `Invalid` named field(s) `byte, reason` emitted positionally as `Invalid(Binary{64}, Bytes)` — Mycelium's `constructor` is positional-only (no record surface); product structure preserved, field names dropped",
+      "item_name": "Utf8Error"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/error.rs",
+      "line": 29,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" An invalid UTF-8 byte sequence was found at a known byte index.\"] # [doc = \"\"] # [doc = \" Produced by [`crate::from_utf8`] when the input bytes are not valid UTF-8.\"] # [doc = \"\"] # [doc = \" # C1 compliance\"] # [doc = \" The error is an explicit `Err(Utf8Error::Invalid { byte, reason })` — **never** a silent\"] # [doc = \" U+FFFD replacement-character substitution (RFC-0016 §4.1 C1; G2 \\\"never-silent\\\"). A caller\"] # [doc = \" who wants U+FFFD substitution must use a distinct, explicitly-named `*_lossy` variant\"] # [doc = \" (unavailable here — see spec §2 scope; `from_utf8` is the strict op).\"] # [doc = \"\"] # [doc = \" # C3 compliance\"] # [doc = \" The `byte` index names **where** the invalid byte is, so the caller can locate it in the\"] # [doc = \" input (the EXPLAIN artifact — RFC-0013 §4.1 I1 \\\"additive and still propagating\\\").\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum Utf8Error { # [doc = \" The byte at index `byte` is not valid UTF-8.\"] # [doc = \"\"] # [doc = \" `reason` is a short human-readable description of why the byte is invalid (C3 / G11).\"] Invalid { # [doc = \" The byte index at which the invalid byte was found.\"] byte : usize , # [doc = \" A short human-readable reason (G11 dual projection; RFC-0013 §4.1).\"] reason : & 'static str , } , }",
+      "reason": "enum `Utf8Error` derive(Clone) is a satisfied no-op under Mycelium's value semantics (ADR-003 — every value already copies structurally; DN-128 §6.1) — not emitted as an impl, not a gap",
+      "item_name": "Utf8Error"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/error.rs",
+      "line": 29,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" An invalid UTF-8 byte sequence was found at a known byte index.\"] # [doc = \"\"] # [doc = \" Produced by [`crate::from_utf8`] when the input bytes are not valid UTF-8.\"] # [doc = \"\"] # [doc = \" # C1 compliance\"] # [doc = \" The error is an explicit `Err(Utf8Error::Invalid { byte, reason })` — **never** a silent\"] # [doc = \" U+FFFD replacement-character substitution (RFC-0016 §4.1 C1; G2 \\\"never-silent\\\"). A caller\"] # [doc = \" who wants U+FFFD substitution must use a distinct, explicitly-named `*_lossy` variant\"] # [doc = \" (unavailable here — see spec §2 scope; `from_utf8` is the strict op).\"] # [doc = \"\"] # [doc = \" # C3 compliance\"] # [doc = \" The `byte` index names **where** the invalid byte is, so the caller can locate it in the\"] # [doc = \" input (the EXPLAIN artifact — RFC-0013 §4.1 I1 \\\"additive and still propagating\\\").\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum Utf8Error { # [doc = \" The byte at index `byte` is not valid UTF-8.\"] # [doc = \"\"] # [doc = \" `reason` is a short human-readable description of why the byte is invalid (C3 / G11).\"] Invalid { # [doc = \" The byte index at which the invalid byte was found.\"] byte : usize , # [doc = \" A short human-readable reason (G11 dual projection; RFC-0013 §4.1).\"] reason : & 'static str , } , }",
+      "reason": "enum `Utf8Error` derive(Eq): covered by co-occurring PartialEq → `fn eq_Utf8Error` (product-row collision policy; DN-128 / ONESHOT C2) — not a second emission",
+      "item_name": "Utf8Error"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/error.rs",
+      "line": 55,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl fmt :: Display for Utf8Error { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { match self { Utf8Error :: Invalid { byte , reason } => { write ! (f , \"invalid UTF-8 at byte {byte}: {reason}\") } } } }",
+      "reason": "trait-impl of non-prelude trait `Display` — no ambient trait definition and synthetic trait emission is refused (DN-34 §8.8 / DN-122 MVP); gapped the whole impl so the residual cannot file-poison myc-check (G2; express gap-close 2026-07-16)",
+      "item_name": "Utf8Error"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/error.rs",
+      "line": 65,
+      "col": 1,
+      "category": "MacroInvocation",
+      "rust_construct": "MacroInvocation",
+      "snippet": "mycelium_std_core :: impl_std_error ! (Utf8Error) ;",
+      "reason": "item-position macro invocation — no macro system in this grammar",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/error.rs",
+      "line": 69,
+      "col": 1,
+      "category": "NamedFieldDrop",
+      "rust_construct": "NamedFieldDrop",
+      "snippet": "# [doc = \" An index into a `Text` was out of range or fell on an invalid boundary.\"] # [doc = \"\"] # [doc = \" Produced by [`crate::slice`] and [`crate::char_at`] when the requested index is not a valid\"] # [doc = \" char/grapheme boundary (or is out of range).\"] # [doc = \"\"] # [doc = \" # C1 compliance\"] # [doc = \" The error is an explicit `Err(BoundaryError::…)` — **never** a silent snap to the nearest\"] # [doc = \" boundary or a truncation (RFC-0016 §4.1 C1; G2).\"] # [doc = \"\"] # [doc = \" # C3 compliance\"] # [doc = \" Each variant carries the offending index and/or the valid length so the caller can diagnose\"] # [doc = \" the failure without reparsing (RFC-0013 §4.1 I1).\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum BoundaryError { # [doc = \" The requested index or range end is past the end of the string.\"] OutOfRange { # [doc = \" The length of the string in bytes.\"] len : usize , # [doc = \" The index (or range end) that was requested.\"] asked : usize , } , # [doc = \" The byte index falls in the middle of a multi-byte codepoint.\"] NotCharBoundary { # [doc = \" The offending byte index.\"] byte : usize , } , # [doc = \" The byte index falls in the middle of a grapheme cluster.\"] # [doc = \"\"] # [doc = \" # FLAG — Q2 (grapheme segmentation)\"] # [doc = \" This variant depends on a versioned Unicode grapheme-break table (spec §7-Q2).\"] # [doc = \" The table version is not yet reified in `Meta` (a maintainer call). The variant\"] # [doc = \" exists so the error type is complete; `slice` with grapheme-boundary checking\"] # [doc = \" will be gated until the table versioning is resolved (spec §7-Q2).\"] NotGraphemeBoundary { # [doc = \" The offending byte index.\"] byte : usize , } , # [doc = \" The requested range is inverted (`start > end`).\"] # [doc = \"\"] # [doc = \" Both endpoints can individually be in range yet describe an empty/negative span; reported\"] # [doc = \" explicitly rather than panicking on the slice index (C1 / G2 — never a runtime panic where\"] # [doc = \" the signature promises `Result`).\"] InvalidRange { # [doc = \" The requested start byte index.\"] start : usize , # [doc = \" The requested end byte index (`< start`).\"] end : usize , } , }",
+      "reason": "enum `BoundaryError` variant `OutOfRange` named field(s) `len, asked` emitted positionally as `OutOfRange(Binary{64}, Binary{64})` — Mycelium's `constructor` is positional-only (no record surface); product structure preserved, field names dropped",
+      "item_name": "BoundaryError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/error.rs",
+      "line": 69,
+      "col": 1,
+      "category": "NamedFieldDrop",
+      "rust_construct": "NamedFieldDrop",
+      "snippet": "# [doc = \" An index into a `Text` was out of range or fell on an invalid boundary.\"] # [doc = \"\"] # [doc = \" Produced by [`crate::slice`] and [`crate::char_at`] when the requested index is not a valid\"] # [doc = \" char/grapheme boundary (or is out of range).\"] # [doc = \"\"] # [doc = \" # C1 compliance\"] # [doc = \" The error is an explicit `Err(BoundaryError::…)` — **never** a silent snap to the nearest\"] # [doc = \" boundary or a truncation (RFC-0016 §4.1 C1; G2).\"] # [doc = \"\"] # [doc = \" # C3 compliance\"] # [doc = \" Each variant carries the offending index and/or the valid length so the caller can diagnose\"] # [doc = \" the failure without reparsing (RFC-0013 §4.1 I1).\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum BoundaryError { # [doc = \" The requested index or range end is past the end of the string.\"] OutOfRange { # [doc = \" The length of the string in bytes.\"] len : usize , # [doc = \" The index (or range end) that was requested.\"] asked : usize , } , # [doc = \" The byte index falls in the middle of a multi-byte codepoint.\"] NotCharBoundary { # [doc = \" The offending byte index.\"] byte : usize , } , # [doc = \" The byte index falls in the middle of a grapheme cluster.\"] # [doc = \"\"] # [doc = \" # FLAG — Q2 (grapheme segmentation)\"] # [doc = \" This variant depends on a versioned Unicode grapheme-break table (spec §7-Q2).\"] # [doc = \" The table version is not yet reified in `Meta` (a maintainer call). The variant\"] # [doc = \" exists so the error type is complete; `slice` with grapheme-boundary checking\"] # [doc = \" will be gated until the table versioning is resolved (spec §7-Q2).\"] NotGraphemeBoundary { # [doc = \" The offending byte index.\"] byte : usize , } , # [doc = \" The requested range is inverted (`start > end`).\"] # [doc = \"\"] # [doc = \" Both endpoints can individually be in range yet describe an empty/negative span; reported\"] # [doc = \" explicitly rather than panicking on the slice index (C1 / G2 — never a runtime panic where\"] # [doc = \" the signature promises `Result`).\"] InvalidRange { # [doc = \" The requested start byte index.\"] start : usize , # [doc = \" The requested end byte index (`< start`).\"] end : usize , } , }",
+      "reason": "enum `BoundaryError` variant `NotCharBoundary` named field(s) `byte` emitted positionally as `NotCharBoundary(Binary{64})` — Mycelium's `constructor` is positional-only (no record surface); product structure preserved, field names dropped",
+      "item_name": "BoundaryError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/error.rs",
+      "line": 69,
+      "col": 1,
+      "category": "NamedFieldDrop",
+      "rust_construct": "NamedFieldDrop",
+      "snippet": "# [doc = \" An index into a `Text` was out of range or fell on an invalid boundary.\"] # [doc = \"\"] # [doc = \" Produced by [`crate::slice`] and [`crate::char_at`] when the requested index is not a valid\"] # [doc = \" char/grapheme boundary (or is out of range).\"] # [doc = \"\"] # [doc = \" # C1 compliance\"] # [doc = \" The error is an explicit `Err(BoundaryError::…)` — **never** a silent snap to the nearest\"] # [doc = \" boundary or a truncation (RFC-0016 §4.1 C1; G2).\"] # [doc = \"\"] # [doc = \" # C3 compliance\"] # [doc = \" Each variant carries the offending index and/or the valid length so the caller can diagnose\"] # [doc = \" the failure without reparsing (RFC-0013 §4.1 I1).\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum BoundaryError { # [doc = \" The requested index or range end is past the end of the string.\"] OutOfRange { # [doc = \" The length of the string in bytes.\"] len : usize , # [doc = \" The index (or range end) that was requested.\"] asked : usize , } , # [doc = \" The byte index falls in the middle of a multi-byte codepoint.\"] NotCharBoundary { # [doc = \" The offending byte index.\"] byte : usize , } , # [doc = \" The byte index falls in the middle of a grapheme cluster.\"] # [doc = \"\"] # [doc = \" # FLAG — Q2 (grapheme segmentation)\"] # [doc = \" This variant depends on a versioned Unicode grapheme-break table (spec §7-Q2).\"] # [doc = \" The table version is not yet reified in `Meta` (a maintainer call). The variant\"] # [doc = \" exists so the error type is complete; `slice` with grapheme-boundary checking\"] # [doc = \" will be gated until the table versioning is resolved (spec §7-Q2).\"] NotGraphemeBoundary { # [doc = \" The offending byte index.\"] byte : usize , } , # [doc = \" The requested range is inverted (`start > end`).\"] # [doc = \"\"] # [doc = \" Both endpoints can individually be in range yet describe an empty/negative span; reported\"] # [doc = \" explicitly rather than panicking on the slice index (C1 / G2 — never a runtime panic where\"] # [doc = \" the signature promises `Result`).\"] InvalidRange { # [doc = \" The requested start byte index.\"] start : usize , # [doc = \" The requested end byte index (`< start`).\"] end : usize , } , }",
+      "reason": "enum `BoundaryError` variant `NotGraphemeBoundary` named field(s) `byte` emitted positionally as `NotGraphemeBoundary(Binary{64})` — Mycelium's `constructor` is positional-only (no record surface); product structure preserved, field names dropped",
+      "item_name": "BoundaryError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/error.rs",
+      "line": 69,
+      "col": 1,
+      "category": "NamedFieldDrop",
+      "rust_construct": "NamedFieldDrop",
+      "snippet": "# [doc = \" An index into a `Text` was out of range or fell on an invalid boundary.\"] # [doc = \"\"] # [doc = \" Produced by [`crate::slice`] and [`crate::char_at`] when the requested index is not a valid\"] # [doc = \" char/grapheme boundary (or is out of range).\"] # [doc = \"\"] # [doc = \" # C1 compliance\"] # [doc = \" The error is an explicit `Err(BoundaryError::…)` — **never** a silent snap to the nearest\"] # [doc = \" boundary or a truncation (RFC-0016 §4.1 C1; G2).\"] # [doc = \"\"] # [doc = \" # C3 compliance\"] # [doc = \" Each variant carries the offending index and/or the valid length so the caller can diagnose\"] # [doc = \" the failure without reparsing (RFC-0013 §4.1 I1).\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum BoundaryError { # [doc = \" The requested index or range end is past the end of the string.\"] OutOfRange { # [doc = \" The length of the string in bytes.\"] len : usize , # [doc = \" The index (or range end) that was requested.\"] asked : usize , } , # [doc = \" The byte index falls in the middle of a multi-byte codepoint.\"] NotCharBoundary { # [doc = \" The offending byte index.\"] byte : usize , } , # [doc = \" The byte index falls in the middle of a grapheme cluster.\"] # [doc = \"\"] # [doc = \" # FLAG — Q2 (grapheme segmentation)\"] # [doc = \" This variant depends on a versioned Unicode grapheme-break table (spec §7-Q2).\"] # [doc = \" The table version is not yet reified in `Meta` (a maintainer call). The variant\"] # [doc = \" exists so the error type is complete; `slice` with grapheme-boundary checking\"] # [doc = \" will be gated until the table versioning is resolved (spec §7-Q2).\"] NotGraphemeBoundary { # [doc = \" The offending byte index.\"] byte : usize , } , # [doc = \" The requested range is inverted (`start > end`).\"] # [doc = \"\"] # [doc = \" Both endpoints can individually be in range yet describe an empty/negative span; reported\"] # [doc = \" explicitly rather than panicking on the slice index (C1 / G2 — never a runtime panic where\"] # [doc = \" the signature promises `Result`).\"] InvalidRange { # [doc = \" The requested start byte index.\"] start : usize , # [doc = \" The requested end byte index (`< start`).\"] end : usize , } , }",
+      "reason": "enum `BoundaryError` variant `InvalidRange` named field(s) `start, end` emitted positionally as `InvalidRange(Binary{64}, Binary{64})` — Mycelium's `constructor` is positional-only (no record surface); product structure preserved, field names dropped",
+      "item_name": "BoundaryError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/error.rs",
+      "line": 69,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" An index into a `Text` was out of range or fell on an invalid boundary.\"] # [doc = \"\"] # [doc = \" Produced by [`crate::slice`] and [`crate::char_at`] when the requested index is not a valid\"] # [doc = \" char/grapheme boundary (or is out of range).\"] # [doc = \"\"] # [doc = \" # C1 compliance\"] # [doc = \" The error is an explicit `Err(BoundaryError::…)` — **never** a silent snap to the nearest\"] # [doc = \" boundary or a truncation (RFC-0016 §4.1 C1; G2).\"] # [doc = \"\"] # [doc = \" # C3 compliance\"] # [doc = \" Each variant carries the offending index and/or the valid length so the caller can diagnose\"] # [doc = \" the failure without reparsing (RFC-0013 §4.1 I1).\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum BoundaryError { # [doc = \" The requested index or range end is past the end of the string.\"] OutOfRange { # [doc = \" The length of the string in bytes.\"] len : usize , # [doc = \" The index (or range end) that was requested.\"] asked : usize , } , # [doc = \" The byte index falls in the middle of a multi-byte codepoint.\"] NotCharBoundary { # [doc = \" The offending byte index.\"] byte : usize , } , # [doc = \" The byte index falls in the middle of a grapheme cluster.\"] # [doc = \"\"] # [doc = \" # FLAG — Q2 (grapheme segmentation)\"] # [doc = \" This variant depends on a versioned Unicode grapheme-break table (spec §7-Q2).\"] # [doc = \" The table version is not yet reified in `Meta` (a maintainer call). The variant\"] # [doc = \" exists so the error type is complete; `slice` with grapheme-boundary checking\"] # [doc = \" will be gated until the table versioning is resolved (spec §7-Q2).\"] NotGraphemeBoundary { # [doc = \" The offending byte index.\"] byte : usize , } , # [doc = \" The requested range is inverted (`start > end`).\"] # [doc = \"\"] # [doc = \" Both endpoints can individually be in range yet describe an empty/negative span; reported\"] # [doc = \" explicitly rather than panicking on the slice index (C1 / G2 — never a runtime panic where\"] # [doc = \" the signature promises `Result`).\"] InvalidRange { # [doc = \" The requested start byte index.\"] start : usize , # [doc = \" The requested end byte index (`< start`).\"] end : usize , } , }",
+      "reason": "enum `BoundaryError` derive(Clone) is a satisfied no-op under Mycelium's value semantics (ADR-003 — every value already copies structurally; DN-128 §6.1) — not emitted as an impl, not a gap",
+      "item_name": "BoundaryError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/error.rs",
+      "line": 69,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" An index into a `Text` was out of range or fell on an invalid boundary.\"] # [doc = \"\"] # [doc = \" Produced by [`crate::slice`] and [`crate::char_at`] when the requested index is not a valid\"] # [doc = \" char/grapheme boundary (or is out of range).\"] # [doc = \"\"] # [doc = \" # C1 compliance\"] # [doc = \" The error is an explicit `Err(BoundaryError::…)` — **never** a silent snap to the nearest\"] # [doc = \" boundary or a truncation (RFC-0016 §4.1 C1; G2).\"] # [doc = \"\"] # [doc = \" # C3 compliance\"] # [doc = \" Each variant carries the offending index and/or the valid length so the caller can diagnose\"] # [doc = \" the failure without reparsing (RFC-0013 §4.1 I1).\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum BoundaryError { # [doc = \" The requested index or range end is past the end of the string.\"] OutOfRange { # [doc = \" The length of the string in bytes.\"] len : usize , # [doc = \" The index (or range end) that was requested.\"] asked : usize , } , # [doc = \" The byte index falls in the middle of a multi-byte codepoint.\"] NotCharBoundary { # [doc = \" The offending byte index.\"] byte : usize , } , # [doc = \" The byte index falls in the middle of a grapheme cluster.\"] # [doc = \"\"] # [doc = \" # FLAG — Q2 (grapheme segmentation)\"] # [doc = \" This variant depends on a versioned Unicode grapheme-break table (spec §7-Q2).\"] # [doc = \" The table version is not yet reified in `Meta` (a maintainer call). The variant\"] # [doc = \" exists so the error type is complete; `slice` with grapheme-boundary checking\"] # [doc = \" will be gated until the table versioning is resolved (spec §7-Q2).\"] NotGraphemeBoundary { # [doc = \" The offending byte index.\"] byte : usize , } , # [doc = \" The requested range is inverted (`start > end`).\"] # [doc = \"\"] # [doc = \" Both endpoints can individually be in range yet describe an empty/negative span; reported\"] # [doc = \" explicitly rather than panicking on the slice index (C1 / G2 — never a runtime panic where\"] # [doc = \" the signature promises `Result`).\"] InvalidRange { # [doc = \" The requested start byte index.\"] start : usize , # [doc = \" The requested end byte index (`< start`).\"] end : usize , } , }",
+      "reason": "enum `BoundaryError` derive(Eq): covered by co-occurring PartialEq → `fn eq_BoundaryError` (product-row collision policy; DN-128 / ONESHOT C2) — not a second emission",
+      "item_name": "BoundaryError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/error.rs",
+      "line": 119,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl fmt :: Display for BoundaryError { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { match self { BoundaryError :: OutOfRange { len , asked } => { write ! (f , \"index {asked} is out of range (string length {len})\") } BoundaryError :: NotCharBoundary { byte } => { write ! (f , \"byte index {byte} is not on a char boundary\") } BoundaryError :: NotGraphemeBoundary { byte } => { write ! (f , \"byte index {byte} is not on a grapheme-cluster boundary\") } BoundaryError :: InvalidRange { start , end } => { write ! (f , \"inverted range: start {start} is greater than end {end}\") } } } }",
+      "reason": "trait-impl of non-prelude trait `Display` — no ambient trait definition and synthetic trait emission is refused (DN-34 §8.8 / DN-122 MVP); gapped the whole impl so the residual cannot file-poison myc-check (G2; express gap-close 2026-07-16)",
+      "item_name": "BoundaryError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/error.rs",
+      "line": 138,
+      "col": 1,
+      "category": "MacroInvocation",
+      "rust_construct": "MacroInvocation",
+      "snippet": "mycelium_std_core :: impl_std_error ! (BoundaryError) ;",
+      "reason": "item-position macro invocation — no macro system in this grammar",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/error.rs",
+      "line": 142,
+      "col": 1,
+      "category": "NamedFieldDrop",
+      "rust_construct": "NamedFieldDrop",
+      "snippet": "# [doc = \" A parse failure: the input string was empty, malformed, or the lexically-valid value was\"] # [doc = \" out of range for the target type.\"] # [doc = \"\"] # [doc = \" Produced by [`crate::parse_int`] and [`crate::parse_bool`].\"] # [doc = \"\"] # [doc = \" # Honesty crux (C1 / RFC-0016 §4.4)\"] # [doc = \" `parse` returns a **`Result`, never a sentinel** (`0` / `false` / `\\\"\\\"`). A malformed input is\"] # [doc = \" `Err(ParseErr)` carrying the byte/char index + expected-vs-found (the RFC-0013 §4.1 diagnostic\"] # [doc = \" record I1). The caller cannot silently ignore the failure.\"] # [doc = \"\"] # [doc = \" # C3 compliance\"] # [doc = \" `Invalid { at, expected, found }` carries **where** the parse failed and **what** was expected\"] # [doc = \" vs found — the EXPLAIN artifact (RFC-0013 §4.1 I1 \\\"additive over the explicit error\\\").\"] # [doc = \"\"] # [doc = \" # FLAG — Q3 (parse ↔ numerics value-semantics seam)\"] # [doc = \" `ParseErr::OutOfRange { at, target }` is the hand-off point: `text` owns the lexical failure,\"] # [doc = \" `math`/`numerics` own the value-range semantics. See module-level FLAG Q3.\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum ParseErr { # [doc = \" The input string was empty.\"] Empty , # [doc = \" The input was lexically invalid at the given byte index.\"] Invalid { # [doc = \" The byte index at which the unexpected character was found.\"] at : usize , # [doc = \" A short description of what was expected at this position (G11).\"] expected : & 'static str , # [doc = \" A short description of what was actually found (G11).\"] found : String , } , # [doc = \" The digit sequence was lexically valid but outside the range of `target`.\"] # [doc = \"\"] # [doc = \" # FLAG — Q3\"] # [doc = \" `text` reports the out-of-range condition; the numeric module (M-525/M-512) owns the\"] # [doc = \" authoritative range semantics. This is the `text`-layer hand-off only.\"] OutOfRange { # [doc = \" The byte index at which the out-of-range value starts.\"] at : usize , # [doc = \" The target type that the value was being parsed into.\"] target : & 'static str , } , }",
+      "reason": "enum `ParseErr` variant `Invalid` named field(s) `at, expected, found` emitted positionally as `Invalid(Binary{64}, Bytes, Bytes)` — Mycelium's `constructor` is positional-only (no record surface); product structure preserved, field names dropped",
+      "item_name": "ParseErr"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/error.rs",
+      "line": 142,
+      "col": 1,
+      "category": "NamedFieldDrop",
+      "rust_construct": "NamedFieldDrop",
+      "snippet": "# [doc = \" A parse failure: the input string was empty, malformed, or the lexically-valid value was\"] # [doc = \" out of range for the target type.\"] # [doc = \"\"] # [doc = \" Produced by [`crate::parse_int`] and [`crate::parse_bool`].\"] # [doc = \"\"] # [doc = \" # Honesty crux (C1 / RFC-0016 §4.4)\"] # [doc = \" `parse` returns a **`Result`, never a sentinel** (`0` / `false` / `\\\"\\\"`). A malformed input is\"] # [doc = \" `Err(ParseErr)` carrying the byte/char index + expected-vs-found (the RFC-0013 §4.1 diagnostic\"] # [doc = \" record I1). The caller cannot silently ignore the failure.\"] # [doc = \"\"] # [doc = \" # C3 compliance\"] # [doc = \" `Invalid { at, expected, found }` carries **where** the parse failed and **what** was expected\"] # [doc = \" vs found — the EXPLAIN artifact (RFC-0013 §4.1 I1 \\\"additive over the explicit error\\\").\"] # [doc = \"\"] # [doc = \" # FLAG — Q3 (parse ↔ numerics value-semantics seam)\"] # [doc = \" `ParseErr::OutOfRange { at, target }` is the hand-off point: `text` owns the lexical failure,\"] # [doc = \" `math`/`numerics` own the value-range semantics. See module-level FLAG Q3.\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum ParseErr { # [doc = \" The input string was empty.\"] Empty , # [doc = \" The input was lexically invalid at the given byte index.\"] Invalid { # [doc = \" The byte index at which the unexpected character was found.\"] at : usize , # [doc = \" A short description of what was expected at this position (G11).\"] expected : & 'static str , # [doc = \" A short description of what was actually found (G11).\"] found : String , } , # [doc = \" The digit sequence was lexically valid but outside the range of `target`.\"] # [doc = \"\"] # [doc = \" # FLAG — Q3\"] # [doc = \" `text` reports the out-of-range condition; the numeric module (M-525/M-512) owns the\"] # [doc = \" authoritative range semantics. This is the `text`-layer hand-off only.\"] OutOfRange { # [doc = \" The byte index at which the out-of-range value starts.\"] at : usize , # [doc = \" The target type that the value was being parsed into.\"] target : & 'static str , } , }",
+      "reason": "enum `ParseErr` variant `OutOfRange` named field(s) `at, target` emitted positionally as `OutOfRange(Binary{64}, Bytes)` — Mycelium's `constructor` is positional-only (no record surface); product structure preserved, field names dropped",
+      "item_name": "ParseErr"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/error.rs",
+      "line": 142,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" A parse failure: the input string was empty, malformed, or the lexically-valid value was\"] # [doc = \" out of range for the target type.\"] # [doc = \"\"] # [doc = \" Produced by [`crate::parse_int`] and [`crate::parse_bool`].\"] # [doc = \"\"] # [doc = \" # Honesty crux (C1 / RFC-0016 §4.4)\"] # [doc = \" `parse` returns a **`Result`, never a sentinel** (`0` / `false` / `\\\"\\\"`). A malformed input is\"] # [doc = \" `Err(ParseErr)` carrying the byte/char index + expected-vs-found (the RFC-0013 §4.1 diagnostic\"] # [doc = \" record I1). The caller cannot silently ignore the failure.\"] # [doc = \"\"] # [doc = \" # C3 compliance\"] # [doc = \" `Invalid { at, expected, found }` carries **where** the parse failed and **what** was expected\"] # [doc = \" vs found — the EXPLAIN artifact (RFC-0013 §4.1 I1 \\\"additive over the explicit error\\\").\"] # [doc = \"\"] # [doc = \" # FLAG — Q3 (parse ↔ numerics value-semantics seam)\"] # [doc = \" `ParseErr::OutOfRange { at, target }` is the hand-off point: `text` owns the lexical failure,\"] # [doc = \" `math`/`numerics` own the value-range semantics. See module-level FLAG Q3.\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum ParseErr { # [doc = \" The input string was empty.\"] Empty , # [doc = \" The input was lexically invalid at the given byte index.\"] Invalid { # [doc = \" The byte index at which the unexpected character was found.\"] at : usize , # [doc = \" A short description of what was expected at this position (G11).\"] expected : & 'static str , # [doc = \" A short description of what was actually found (G11).\"] found : String , } , # [doc = \" The digit sequence was lexically valid but outside the range of `target`.\"] # [doc = \"\"] # [doc = \" # FLAG — Q3\"] # [doc = \" `text` reports the out-of-range condition; the numeric module (M-525/M-512) owns the\"] # [doc = \" authoritative range semantics. This is the `text`-layer hand-off only.\"] OutOfRange { # [doc = \" The byte index at which the out-of-range value starts.\"] at : usize , # [doc = \" The target type that the value was being parsed into.\"] target : & 'static str , } , }",
+      "reason": "enum `ParseErr` derive(Clone) is a satisfied no-op under Mycelium's value semantics (ADR-003 — every value already copies structurally; DN-128 §6.1) — not emitted as an impl, not a gap",
+      "item_name": "ParseErr"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/error.rs",
+      "line": 142,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" A parse failure: the input string was empty, malformed, or the lexically-valid value was\"] # [doc = \" out of range for the target type.\"] # [doc = \"\"] # [doc = \" Produced by [`crate::parse_int`] and [`crate::parse_bool`].\"] # [doc = \"\"] # [doc = \" # Honesty crux (C1 / RFC-0016 §4.4)\"] # [doc = \" `parse` returns a **`Result`, never a sentinel** (`0` / `false` / `\\\"\\\"`). A malformed input is\"] # [doc = \" `Err(ParseErr)` carrying the byte/char index + expected-vs-found (the RFC-0013 §4.1 diagnostic\"] # [doc = \" record I1). The caller cannot silently ignore the failure.\"] # [doc = \"\"] # [doc = \" # C3 compliance\"] # [doc = \" `Invalid { at, expected, found }` carries **where** the parse failed and **what** was expected\"] # [doc = \" vs found — the EXPLAIN artifact (RFC-0013 §4.1 I1 \\\"additive over the explicit error\\\").\"] # [doc = \"\"] # [doc = \" # FLAG — Q3 (parse ↔ numerics value-semantics seam)\"] # [doc = \" `ParseErr::OutOfRange { at, target }` is the hand-off point: `text` owns the lexical failure,\"] # [doc = \" `math`/`numerics` own the value-range semantics. See module-level FLAG Q3.\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum ParseErr { # [doc = \" The input string was empty.\"] Empty , # [doc = \" The input was lexically invalid at the given byte index.\"] Invalid { # [doc = \" The byte index at which the unexpected character was found.\"] at : usize , # [doc = \" A short description of what was expected at this position (G11).\"] expected : & 'static str , # [doc = \" A short description of what was actually found (G11).\"] found : String , } , # [doc = \" The digit sequence was lexically valid but outside the range of `target`.\"] # [doc = \"\"] # [doc = \" # FLAG — Q3\"] # [doc = \" `text` reports the out-of-range condition; the numeric module (M-525/M-512) owns the\"] # [doc = \" authoritative range semantics. This is the `text`-layer hand-off only.\"] OutOfRange { # [doc = \" The byte index at which the out-of-range value starts.\"] at : usize , # [doc = \" The target type that the value was being parsed into.\"] target : & 'static str , } , }",
+      "reason": "enum `ParseErr` derive(Eq): covered by co-occurring PartialEq → `fn eq_ParseErr` (product-row collision policy; DN-128 / ONESHOT C2) — not a second emission",
+      "item_name": "ParseErr"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/error.rs",
+      "line": 185,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl fmt :: Display for ParseErr { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { match self { ParseErr :: Empty => write ! (f , \"parse error: input is empty\") , ParseErr :: Invalid { at , expected , found , } => write ! (f , \"parse error at byte {at}: expected {expected}, found {found:?}\") , ParseErr :: OutOfRange { at , target } => write ! (f , \"parse error at byte {at}: value is out of range for {target}\") , } } }",
+      "reason": "trait-impl of non-prelude trait `Display` — no ambient trait definition and synthetic trait emission is refused (DN-34 §8.8 / DN-122 MVP); gapped the whole impl so the residual cannot file-poison myc-check (G2; express gap-close 2026-07-16)",
+      "item_name": "ParseErr"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/error.rs",
+      "line": 205,
+      "col": 1,
+      "category": "MacroInvocation",
+      "rust_construct": "MacroInvocation",
+      "snippet": "mycelium_std_core :: impl_std_error ! (ParseErr) ;",
+      "reason": "item-position macro invocation — no macro system in this grammar",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/error.rs",
+      "line": 209,
+      "col": 1,
+      "category": "NamedFieldDrop",
+      "rust_construct": "NamedFieldDrop",
+      "snippet": "# [doc = \" A character in the `Text` is not representable in the target encoding.\"] # [doc = \"\"] # [doc = \" Produced by [`crate::to_latin1`] (the strict variant — never by `to_latin1_lossy`).\"] # [doc = \"\"] # [doc = \" # C1 compliance\"] # [doc = \" The error is an explicit `Err(EncodeError::Unrepresentable { ch, at, target_encoding })` —\"] # [doc = \" **never** a silent U+FFFD substitution. A caller who wants substitution must call\"] # [doc = \" [`crate::to_latin1_lossy`] explicitly (spec §2 / §3).\"] # [doc = \"\"] # [doc = \" # C3 compliance\"] # [doc = \" The variant carries the offending character, its char index, and the target encoding name\"] # [doc = \" (RFC-0013 §4.1 I1 — the EXPLAIN artifact naming where and what).\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum EncodeError { # [doc = \" The character at char index `at` is not representable in `target_encoding`.\"] Unrepresentable { # [doc = \" The unrepresentable character.\"] ch : char , # [doc = \" The char-boundary index of the unrepresentable character.\"] at : usize , # [doc = \" The name of the target encoding (e.g. `\\\"Latin-1\\\"`).\"] target_encoding : & 'static str , } , }",
+      "reason": "enum `EncodeError` variant `Unrepresentable` named field(s) `ch, at, target_encoding` emitted positionally as `Unrepresentable(Binary{32}, Binary{64}, Bytes)` — Mycelium's `constructor` is positional-only (no record surface); product structure preserved, field names dropped",
+      "item_name": "EncodeError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/error.rs",
+      "line": 209,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" A character in the `Text` is not representable in the target encoding.\"] # [doc = \"\"] # [doc = \" Produced by [`crate::to_latin1`] (the strict variant — never by `to_latin1_lossy`).\"] # [doc = \"\"] # [doc = \" # C1 compliance\"] # [doc = \" The error is an explicit `Err(EncodeError::Unrepresentable { ch, at, target_encoding })` —\"] # [doc = \" **never** a silent U+FFFD substitution. A caller who wants substitution must call\"] # [doc = \" [`crate::to_latin1_lossy`] explicitly (spec §2 / §3).\"] # [doc = \"\"] # [doc = \" # C3 compliance\"] # [doc = \" The variant carries the offending character, its char index, and the target encoding name\"] # [doc = \" (RFC-0013 §4.1 I1 — the EXPLAIN artifact naming where and what).\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum EncodeError { # [doc = \" The character at char index `at` is not representable in `target_encoding`.\"] Unrepresentable { # [doc = \" The unrepresentable character.\"] ch : char , # [doc = \" The char-boundary index of the unrepresentable character.\"] at : usize , # [doc = \" The name of the target encoding (e.g. `\\\"Latin-1\\\"`).\"] target_encoding : & 'static str , } , }",
+      "reason": "enum `EncodeError` derive(Clone) is a satisfied no-op under Mycelium's value semantics (ADR-003 — every value already copies structurally; DN-128 §6.1) — not emitted as an impl, not a gap",
+      "item_name": "EncodeError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/error.rs",
+      "line": 209,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" A character in the `Text` is not representable in the target encoding.\"] # [doc = \"\"] # [doc = \" Produced by [`crate::to_latin1`] (the strict variant — never by `to_latin1_lossy`).\"] # [doc = \"\"] # [doc = \" # C1 compliance\"] # [doc = \" The error is an explicit `Err(EncodeError::Unrepresentable { ch, at, target_encoding })` —\"] # [doc = \" **never** a silent U+FFFD substitution. A caller who wants substitution must call\"] # [doc = \" [`crate::to_latin1_lossy`] explicitly (spec §2 / §3).\"] # [doc = \"\"] # [doc = \" # C3 compliance\"] # [doc = \" The variant carries the offending character, its char index, and the target encoding name\"] # [doc = \" (RFC-0013 §4.1 I1 — the EXPLAIN artifact naming where and what).\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum EncodeError { # [doc = \" The character at char index `at` is not representable in `target_encoding`.\"] Unrepresentable { # [doc = \" The unrepresentable character.\"] ch : char , # [doc = \" The char-boundary index of the unrepresentable character.\"] at : usize , # [doc = \" The name of the target encoding (e.g. `\\\"Latin-1\\\"`).\"] target_encoding : & 'static str , } , }",
+      "reason": "enum `EncodeError` derive(Eq): covered by co-occurring PartialEq → `fn eq_EncodeError` (product-row collision policy; DN-128 / ONESHOT C2) — not a second emission",
+      "item_name": "EncodeError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/error.rs",
+      "line": 234,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl fmt :: Display for EncodeError { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { match self { EncodeError :: Unrepresentable { ch , at , target_encoding , } => write ! (f , \"character {:?} at char index {} is not representable in {}\" , ch , at , target_encoding) , } } }",
+      "reason": "trait-impl of non-prelude trait `Display` — no ambient trait definition and synthetic trait emission is refused (DN-34 §8.8 / DN-122 MVP); gapped the whole impl so the residual cannot file-poison myc-check (G2; express gap-close 2026-07-16)",
+      "item_name": "EncodeError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/error.rs",
+      "line": 250,
+      "col": 1,
+      "category": "MacroInvocation",
+      "rust_construct": "MacroInvocation",
+      "snippet": "mycelium_std_core :: impl_std_error ! (EncodeError) ;",
+      "reason": "item-position macro invocation — no macro system in this grammar",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/error.rs",
+      "line": 254,
+      "col": 1,
+      "category": "NamedFieldDrop",
+      "rust_construct": "NamedFieldDrop",
+      "snippet": "# [doc = \" A UTF-16 unit sequence is invalid (unpaired surrogate or otherwise invalid unit).\"] # [doc = \"\"] # [doc = \" Produced by [`crate::from_utf16`].\"] # [doc = \"\"] # [doc = \" # C1 compliance\"] # [doc = \" The error is an explicit `Err(TranscodeError::…)` — **never** a silent U+FFFD substitution\"] # [doc = \" (RFC-0016 §4.1 C1; G2). A caller who wants U+FFFD substitution must use the distinct, named\"] # [doc = \" `from_utf16_lossy` variant (not exposed in this crate — see spec §2).\"] # [doc = \"\"] # [doc = \" # C3 compliance\"] # [doc = \" Each variant carries the unit index at which the invalid sequence starts (RFC-0013 §4.1 I1).\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum TranscodeError { # [doc = \" A surrogate code unit at `at` is unpaired (no matching low/high surrogate follows/precedes).\"] UnpairedSurrogate { # [doc = \" The UTF-16 unit index of the unpaired surrogate.\"] at : usize , } , # [doc = \" An invalid code unit was encountered at `at`.\"] Invalid { # [doc = \" The UTF-16 unit index of the invalid unit.\"] at : usize , } , }",
+      "reason": "enum `TranscodeError` variant `UnpairedSurrogate` named field(s) `at` emitted positionally as `UnpairedSurrogate(Binary{64})` — Mycelium's `constructor` is positional-only (no record surface); product structure preserved, field names dropped",
+      "item_name": "TranscodeError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/error.rs",
+      "line": 254,
+      "col": 1,
+      "category": "NamedFieldDrop",
+      "rust_construct": "NamedFieldDrop",
+      "snippet": "# [doc = \" A UTF-16 unit sequence is invalid (unpaired surrogate or otherwise invalid unit).\"] # [doc = \"\"] # [doc = \" Produced by [`crate::from_utf16`].\"] # [doc = \"\"] # [doc = \" # C1 compliance\"] # [doc = \" The error is an explicit `Err(TranscodeError::…)` — **never** a silent U+FFFD substitution\"] # [doc = \" (RFC-0016 §4.1 C1; G2). A caller who wants U+FFFD substitution must use the distinct, named\"] # [doc = \" `from_utf16_lossy` variant (not exposed in this crate — see spec §2).\"] # [doc = \"\"] # [doc = \" # C3 compliance\"] # [doc = \" Each variant carries the unit index at which the invalid sequence starts (RFC-0013 §4.1 I1).\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum TranscodeError { # [doc = \" A surrogate code unit at `at` is unpaired (no matching low/high surrogate follows/precedes).\"] UnpairedSurrogate { # [doc = \" The UTF-16 unit index of the unpaired surrogate.\"] at : usize , } , # [doc = \" An invalid code unit was encountered at `at`.\"] Invalid { # [doc = \" The UTF-16 unit index of the invalid unit.\"] at : usize , } , }",
+      "reason": "enum `TranscodeError` variant `Invalid` named field(s) `at` emitted positionally as `Invalid(Binary{64})` — Mycelium's `constructor` is positional-only (no record surface); product structure preserved, field names dropped",
+      "item_name": "TranscodeError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/error.rs",
+      "line": 254,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" A UTF-16 unit sequence is invalid (unpaired surrogate or otherwise invalid unit).\"] # [doc = \"\"] # [doc = \" Produced by [`crate::from_utf16`].\"] # [doc = \"\"] # [doc = \" # C1 compliance\"] # [doc = \" The error is an explicit `Err(TranscodeError::…)` — **never** a silent U+FFFD substitution\"] # [doc = \" (RFC-0016 §4.1 C1; G2). A caller who wants U+FFFD substitution must use the distinct, named\"] # [doc = \" `from_utf16_lossy` variant (not exposed in this crate — see spec §2).\"] # [doc = \"\"] # [doc = \" # C3 compliance\"] # [doc = \" Each variant carries the unit index at which the invalid sequence starts (RFC-0013 §4.1 I1).\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum TranscodeError { # [doc = \" A surrogate code unit at `at` is unpaired (no matching low/high surrogate follows/precedes).\"] UnpairedSurrogate { # [doc = \" The UTF-16 unit index of the unpaired surrogate.\"] at : usize , } , # [doc = \" An invalid code unit was encountered at `at`.\"] Invalid { # [doc = \" The UTF-16 unit index of the invalid unit.\"] at : usize , } , }",
+      "reason": "enum `TranscodeError` derive(Clone) is a satisfied no-op under Mycelium's value semantics (ADR-003 — every value already copies structurally; DN-128 §6.1) — not emitted as an impl, not a gap",
+      "item_name": "TranscodeError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/error.rs",
+      "line": 254,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" A UTF-16 unit sequence is invalid (unpaired surrogate or otherwise invalid unit).\"] # [doc = \"\"] # [doc = \" Produced by [`crate::from_utf16`].\"] # [doc = \"\"] # [doc = \" # C1 compliance\"] # [doc = \" The error is an explicit `Err(TranscodeError::…)` — **never** a silent U+FFFD substitution\"] # [doc = \" (RFC-0016 §4.1 C1; G2). A caller who wants U+FFFD substitution must use the distinct, named\"] # [doc = \" `from_utf16_lossy` variant (not exposed in this crate — see spec §2).\"] # [doc = \"\"] # [doc = \" # C3 compliance\"] # [doc = \" Each variant carries the unit index at which the invalid sequence starts (RFC-0013 §4.1 I1).\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum TranscodeError { # [doc = \" A surrogate code unit at `at` is unpaired (no matching low/high surrogate follows/precedes).\"] UnpairedSurrogate { # [doc = \" The UTF-16 unit index of the unpaired surrogate.\"] at : usize , } , # [doc = \" An invalid code unit was encountered at `at`.\"] Invalid { # [doc = \" The UTF-16 unit index of the invalid unit.\"] at : usize , } , }",
+      "reason": "enum `TranscodeError` derive(Eq): covered by co-occurring PartialEq → `fn eq_TranscodeError` (product-row collision policy; DN-128 / ONESHOT C2) — not a second emission",
+      "item_name": "TranscodeError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/error.rs",
+      "line": 279,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl fmt :: Display for TranscodeError { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { match self { TranscodeError :: UnpairedSurrogate { at } => { write ! (f , \"unpaired UTF-16 surrogate at unit index {at}\") } TranscodeError :: Invalid { at } => { write ! (f , \"invalid UTF-16 unit at index {at}\") } } } }",
+      "reason": "trait-impl of non-prelude trait `Display` — no ambient trait definition and synthetic trait emission is refused (DN-34 §8.8 / DN-122 MVP); gapped the whole impl so the residual cannot file-poison myc-check (G2; express gap-close 2026-07-16)",
+      "item_name": "TranscodeError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/error.rs",
+      "line": 292,
+      "col": 1,
+      "category": "MacroInvocation",
+      "rust_construct": "MacroInvocation",
+      "snippet": "mycelium_std_core :: impl_std_error ! (TranscodeError) ;",
+      "reason": "item-position macro invocation — no macro system in this grammar",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/error.rs",
+      "line": 296,
+      "col": 1,
+      "category": "TestItem",
+      "rust_construct": "TestItem",
+      "snippet": "# [cfg (test)] mod tests { use super :: * ; # [doc = \" `Utf8Error::Invalid` carries the byte index and reason (C3 — EXPLAIN artifact).\"] # [test] fn utf8_error_display_carries_index_and_reason () { let e = Utf8Error :: Invalid { byte : 3 , reason : \"continuation byte expected\" , } ; let s = e . to_string () ; assert ! (s . contains (\"3\") , \"must include byte index\") ; assert ! (s . contains (\"continuation byte expected\") , \"must include reason\") ; } # [test] fn utf8_error_is_std_error () { let e = Utf8Error :: Invalid { byte : 0 , reason : \"test\" , } ; let _ : & dyn std :: error :: Error = & e ; } # [doc = \" Out-of-range variant carries len and asked (C3).\"] # [test] fn boundary_error_out_of_range_display () { let e = BoundaryError :: OutOfRange { len : 5 , asked : 10 } ; let s = e . to_string () ; assert ! (s . contains (\"10\") , \"must include asked index\") ; assert ! (s . contains (\"5\") , \"must include length\") ; } # [doc = \" NotCharBoundary variant carries the byte index (C3).\"] # [test] fn boundary_error_not_char_boundary_display () { let e = BoundaryError :: NotCharBoundary { byte : 2 } ; let s = e . to_string () ; assert ! (s . contains (\"2\") , \"must include byte index\") ; } # [doc = \" NotGraphemeBoundary variant carries the byte index (C3).\"] # [test] fn boundary_error_not_grapheme_boundary_display () { let e = BoundaryError :: NotGraphemeBoundary { byte : 4 } ; let s = e . to_string () ; assert ! (s . contains (\"4\") , \"must include byte index\") ; } # [test] fn boundary_error_is_std_error () { let e = BoundaryError :: OutOfRange { len : 1 , asked : 2 } ; let _ : & dyn std :: error :: Error = & e ; } # [doc = \" Empty parse error has no sentinel in its display.\"] # [test] fn parse_err_empty_display () { let s = ParseErr :: Empty . to_string () ; assert ! (s . contains (\"empty\") , \"must mention empty\") ; } # [doc = \" Invalid variant carries the byte index, expected, and found (C3 — RFC-0013 §4.1 I1).\"] # [test] fn parse_err_invalid_display_carries_where_and_what () { let e = ParseErr :: Invalid { at : 7 , expected : \"digit\" , found : \"x\" . to_string () , } ; let s = e . to_string () ; assert ! (s . contains (\"7\") , \"must include byte index\") ; assert ! (s . contains (\"digit\") , \"must include expected\") ; assert ! (s . contains (\"x\") , \"must include found\") ; } # [doc = \" OutOfRange variant carries the byte index and target type (C3 / FLAG Q3).\"] # [test] fn parse_err_out_of_range_display_carries_at_and_target () { let e = ParseErr :: OutOfRange { at : 0 , target : \"i64\" , } ; let s = e . to_string () ; assert ! (s . contains (\"i64\") , \"must include target type\") ; assert ! (s . contains (\"0\") , \"must include byte index\") ; } # [test] fn parse_err_is_std_error () { let e = ParseErr :: Empty ; let _ : & dyn std :: error :: Error = & e ; } # [doc = \" EncodeError carries the unrepresentable char, its index, and the target encoding (C3).\"] # [test] fn encode_error_unrepresentable_display () { let e = EncodeError :: Unrepresentable { ch : '€' , at : 5 , target_encoding : \"Latin-1\" , } ; let s = e . to_string () ; assert ! (s . contains ('€' . to_string () . as_str ()) , \"must include the char\") ; assert ! (s . contains (\"5\") , \"must include char index\") ; assert ! (s . contains (\"Latin-1\") , \"must include target encoding\") ; } # [test] fn encode_error_is_std_error () { let e = EncodeError :: Unrepresentable { ch : 'X' , at : 0 , target_encoding : \"Latin-1\" , } ; let _ : & dyn std :: error :: Error = & e ; } # [doc = \" UnpairedSurrogate carries the unit index (C3).\"] # [test] fn transcode_error_unpaired_surrogate_display () { let e = TranscodeError :: UnpairedSurrogate { at : 3 } ; let s = e . to_string () ; assert ! (s . contains (\"3\") , \"must include unit index\") ; assert ! (s . contains (\"surrogate\") , \"must mention surrogate\") ; } # [doc = \" Invalid carries the unit index (C3).\"] # [test] fn transcode_error_invalid_display () { let e = TranscodeError :: Invalid { at : 8 } ; let s = e . to_string () ; assert ! (s . contains (\"8\") , \"must include unit index\") ; } # [test] fn transcode_error_is_std_error () { let e = TranscodeError :: UnpairedSurrogate { at : 0 } ; let _ : & dyn std :: error :: Error = & e ; } # [doc = \" Different `BoundaryError` variants produce distinct display strings (G11 dual projection).\"] # [doc = \" Guard: returning the same string for every variant makes this fail.\"] # [test] fn boundary_error_variants_have_distinct_displays () { let oor = BoundaryError :: OutOfRange { len : 10 , asked : 20 } . to_string () ; let ncb = BoundaryError :: NotCharBoundary { byte : 1 } . to_string () ; let ngb = BoundaryError :: NotGraphemeBoundary { byte : 1 } . to_string () ; assert_ne ! (oor , ncb) ; assert_ne ! (oor , ngb) ; assert_ne ! (ncb , ngb) ; } # [doc = \" Different `ParseErr` variants produce distinct display strings (G11).\"] # [doc = \" Guard: returning the same string for every variant makes this fail.\"] # [test] fn parse_err_variants_have_distinct_displays () { let empty = ParseErr :: Empty . to_string () ; let invalid = ParseErr :: Invalid { at : 0 , expected : \"digit\" , found : \"a\" . to_string () , } . to_string () ; let oor = ParseErr :: OutOfRange { at : 0 , target : \"i32\" , } . to_string () ; assert_ne ! (empty , invalid) ; assert_ne ! (empty , oor) ; assert_ne ! (invalid , oor) ; } }",
+      "reason": "#[cfg(test)] item — out of scope for this PoC's transpilation surface (excluded from the expressible-fraction denominator, but recorded, never silently skipped)",
+      "item_name": "tests"
+    }
+  ],
+  "total_top_level_items": 17
+}

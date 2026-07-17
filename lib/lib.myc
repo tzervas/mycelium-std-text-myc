@@ -1,0 +1,106 @@
+// nodule: std.text
+// `std.text` — Ring-2 UTF-8 string type and operations (M-524, #165).
+//
+// The UTF-8 string surface every program needs: a value-semantic, immutable [`Text`] type with
+// construction from bytes/chars, slicing and indexing on **validated** char boundaries, a parse
+// family (`str → T`), and encoding/transcoding between UTF-8 and other encodings.
+//
+// # Honesty crux (RFC-0016 §4.4 — two-part, structural)
+//
+// 1. **`parse` returns a `Result`, never a sentinel** (C1 / G2 "never-silent"). A failed parse
+//    is `Err(`[`ParseErr`]`)` carrying *where* it failed (the byte/char index) and
+//    *expected-vs-found* (the RFC-0013 §4.1 diagnostic record I1). A malformed input is **never**
+//    silently coerced to `0` / `false` / `""`.
+//
+// 2. **Lossy encoding/transcoding is explicit** — a lossy transcode is a **strict `Err`** in the
+//    default arm ([`to_latin1`], [`from_utf16`]), and the **only** path to U+FFFD substitution is
+//    the **distinct, named** [`to_latin1_lossy`] op whose `Lossy<Vec<u8>>` return type carries the
+//    substitution count. A caller cannot lose data silently (G2 / C1).
+//
+// # Guarantee matrix
+//
+// Every exported op has a row in [`guarantee_matrix::MATRIX`] (RFC-0016 §4.5 / spec §4). All ops
+// are `Exact` (no accuracy/precision semantics) and effect-free. The matrix is asserted in tests,
+// not prose-only (C2 / VR-5).
+//
+// # §4.1 contract conformance
+//
+// - **C1 — never-silent (G2):** `parse_*` returns `Result`, never a sentinel; `from_utf8`,
+//   `to_latin1`, `from_utf16` return `Err` on lossy/invalid input, never U+FFFD; `slice`/`char_at`
+//   return `Err` on off-boundary/out-of-range, never a snap/truncation. No sentinel anywhere.
+// - **C2 — honest per-op tag (VR-5):** Every op is `Exact` — `text` has no accuracy/precision
+//   semantics, so there is nothing to downgrade. The honesty is the fallibility column.
+// - **C3 — no black boxes / EXPLAIN (SC-3/G11):** Every op that can reject carries an inspectable
+//   error that names *where* and *what* (RFC-0013 §4.1 I1 — additive, still propagating).
+// - **C4 — content-addressed, value-semantic (ADR-003 / RFC-0001):** `Text` is immutable; every
+//   transform returns a **new** `Text` (never in-place). Two `Text`s with equal bytes are equal.
+// - **C5 — above the small kernel (KC-3):** Ring 2. No trusted code added; no `unsafe`.
+// - **C6 — declared, bounded effects:** All ops are pure (no IO, time, randomness, global state).
+//
+// # Open questions (FLAGs — resolve before ratification)
+//
+// - **(Q1) `Lossy<T>` shape:** distinct type with configurable `marker` (per spec §7-Q1 proposed
+//   disposition). Pending maintainer decision on whether `marker` is configurable or fixed at
+//   U+FFFD. The `Lossy` type anticipates the configurable direction.
+// - **(Q2) Grapheme segmentation table version:** [`len_graphemes`] uses a scalar-value count
+//   placeholder (exact for ASCII/simple Latin; may differ for ZWJ/emoji). Full Unicode grapheme-
+//   break segmentation requires a versioned table reified in `Meta` (spec §7-Q2). Not asserted
+//   as `Proven` (VR-5 — stay honest; the tag stays `Exact` against the placeholder definition).
+// - **(Q3) `parse` ↔ `math`/`numerics` value-semantics seam:** `parse_int` returns `i64` as a
+//   placeholder; the authoritative numeric type and range semantics live in `math`/`numerics`
+//   (M-525/M-512). `ParseErr::OutOfRange` is the `text`-layer hand-off (spec §7-Q3).
+// - **(Q4) UTF-8 validation `wild`/FFI floor:** this crate uses `std::str::from_utf8` (Rust
+//   stdlib — pure, no FFI). The `wild`/FFI question (spec §7-Q4) is resolved at this layer:
+//   no FFI is needed; the C5 "no `wild`" claim holds for this implementation.
+// - **(Q-iter) `chars` return type:** returns `Vec<char>` (value-semantic) rather than
+//   `Iter<Char>` to avoid depending on the unimplemented `std.iter` (M-526) sibling crate.
+//   FLAG to orchestrator: update once M-526 lands.
+//
+// # Ring & layering
+//
+// Ring 2 (RFC-0016 §4.2). `text` is new library code written to the §4.1 contract over Ring 0
+// (`mycelium-core` / `mycelium-std-core`). It adds **no trusted code** and no `unsafe`
+// (KC-3 / `#![forbid(unsafe_code)]`).
+//
+// # Design spec
+// `docs/spec/stdlib/text.md` (M-524, #165). Contract: RFC-0016 §4.1 (C1–C6).
+//
+// ## Ambient Representation (RFC-0012 §8-Q3)
+//
+// This crate's public API participates in the RFC-0012 ambient-representation contract:
+// the representation choice (binary/ternary/dense/VSA) is implicit at the call site but
+// always reified, queryable, and EXPLAIN-able — never a black box (C3/SC-3).
+// [Declared per RFC-0012; direction accepted in DN-07 §8-Q3; per-ring pass scheduled as M-540.]
+//
+// **For this crate (Ring 2, Tier B):** Text ops are representation-opaque at the byte level —
+// `Text` is a UTF-8 byte sequence; callers are responsible for any encoding decision (e.g.,
+// which `Repr` their parsed numeric values use). No ambient encoding is inferred; lossy
+// transcoding is an explicit named op (`to_latin1_lossy`), never a silent substitution.
+//
+// # Stability (DN-66 freeze, 2026-07-01)
+//
+// This crate's public API, as documented in `docs/spec/stdlib/text.md` (spec status:
+// Accepted (2026-06-20)) and asserted by its guarantee-matrix table, is the **frozen baseline** per
+// [DN-66](../../../docs/notes/DN-66-Stdlib-Stable-API-Freeze-And-Rust-Crate-Retirement-Status.md).
+// A future breaking change here needs a spec amendment + changelog entry, not a silent edit (G2).
+//
+// **Unfrozen for the gap-closure window (ADR-045, Accepted 2026-07-10):** this DN-66 freeze is
+// lifted per [ADR-045](../../../docs/adr/ADR-045-Kernel-And-Lexicon-Unfreeze-For-Early-Gap-Closure.md)
+// for a bounded window; a breaking change here still needs a spec amendment + changelog entry
+// (G2), not a silent edit — the window closes per the ADR-045 §2.4 re-freeze conditions, bound by
+// the DN-99 residual worklist.
+// It remains the RFC-0031 D6 differential-oracle reference; the same-named `lib/std/text.myc` prototype is a narrower, structurally distinct surface (DN-66 S3.1) — the D6 retirement trigger has not fired, so no item here is `#[deprecated]`.
+// @summary: best-effort transpilation via mycelium-transpile (M-873). Declared,
+// unvalidated — no Mycelium parser/typechecker confirms this output; see the
+// accompanying .gap.json for every construct this pass could not express.
+nodule std.text;
+
+// EXPLAIN (L2-B/DN-124): Declared co-include of batch-sibling type surface (homes: std.text.error) so single-file oracle is self-contained — not a language `use` identity, not a short-form path collapse (M-1084 full path retained as provenance). Transitive type deps in the same batch are co-included. G2/VR-5.
+type BoundaryError = OutOfRange(Binary{64}, Binary{64}) | NotCharBoundary(Binary{64}) | NotGraphemeBoundary(Binary{64}) | InvalidRange(Binary{64}, Binary{64});
+type EncodeError = Unrepresentable(Binary{32}, Binary{64}, Bytes);
+type ParseErr = Empty | Invalid(Binary{64}, Bytes, Bytes) | OutOfRange(Binary{64}, Bytes);
+type TranscodeError = UnpairedSurrogate(Binary{64}) | Invalid(Binary{64});
+type Utf8Error = Invalid(Binary{64}, Bytes);
+
+// EXPLAIN (L2-B/DN-124): Declared co-include of batch-sibling type surface (homes: std.text.types) so single-file oracle is self-contained — not a language `use` identity, not a short-form path collapse (M-1084 full path retained as provenance). Transitive type deps in the same batch are co-included. G2/VR-5.
+type Text = Text(Bytes);

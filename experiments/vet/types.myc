@@ -1,0 +1,70 @@
+// nodule: std.text.types
+// Core value types for `std.text`: [`Text`] and [`Lossy<T>`].
+//
+// # `Text`
+// An immutable, UTF-8 encoded string value. Value-semantic: every transform returns a **new**
+// `Text`; there is no in-place mutation (C4 / ADR-003). Two `Text` values with equal content
+// are the same value (content-addressed identity — RFC-0001 §4.6); metadata is not identity
+// (ADR-003).
+//
+// # `Lossy<T>`
+// The **type-level opt-in** to lossy transcoding (spec §3 / C1). A caller cannot receive a
+// lossy result silently — they must explicitly call a `*_lossy` operation that returns
+// `Lossy<T>`. The `substituted` count and the `marker` character are always in the value, so
+// the lossiness is un-droppable (G2 / C1).
+//
+// # FLAG — Q1 (Lossy opt-in shape)
+// Whether `Lossy` is a distinct type (as here) or a `Meta`-attached substitution count, and
+// whether the replacement marker is configurable, is deferred to spec §7-Q1. This implementation
+// uses a distinct `Lossy<T>` type with a default U+FFFD marker, following the spec's proposed
+// disposition (spec §7-Q1: "distinct `Lossy` type with U+FFFD-default-but-overridable marker").
+// @summary: best-effort transpilation via mycelium-transpile (M-873). Declared,
+// unvalidated — no Mycelium parser/typechecker confirms this output; see the
+// accompanying .gap.json for every construct this pass could not express.
+nodule std.text.types;
+
+// An immutable, UTF-8 encoded string value (spec §1 / §3).
+//
+// Invariant: the internal bytes are always valid UTF-8.
+//
+// Value-semantic: two `Text` values with identical bytes compare as equal (content-addressed,
+// RFC-0001 §4.6); every transform returns a new `Text` (C4 / ADR-003 — metadata is not
+// identity; immutability is the structural form of C4 for text).
+//
+// # Guarantee tag: `Exact`
+// `Text` carries no accuracy/precision semantics. Construction either succeeds (valid UTF-8)
+// or returns an explicit `Err` (C1 — never-silent).
+pub type Text = Text(Bytes);
+
+impl Show[Text] for Text {
+  fn render(x: Text) => Bytes =
+    match x { Text(p0) => bytes_concat(bytes_concat("Text(", render(p0)), ")") };
+};
+
+fn eq_Text(a: Text, b: Text) => Binary{1} =
+    match a { Text(p0) => match b { Text(q0) => bytes_eq(p0, q0) } };
+
+fn hash_Text(a: Text) => Bytes =
+    match a { Text(p0) => hash_blake3(bytes_concat("Text", hash_blake3(p0))) };
+
+impl Text {
+  // Construct a `Text` from a `&str` slice (total — any `&str` is valid UTF-8).
+  //
+  // This is a pure convenience constructor. The `FromStr` trait implementation delegates here.
+  //
+  // # Guarantee: `Exact` / total
+  // Every `&str` is already validated UTF-8 by Rust's type system; this cannot fail.
+  // Declared: renamed `impl Text { fn new }` -> `_4Text3new` (D4 inherent-impl flat-fn desugar + DN-140 length-prefix mangle, M-664).
+  fn _4Text3new(s: Bytes) => Text = Text((s));
+  // View the internal UTF-8 bytes as a `&str` (total, by-invariant).
+  fn as_str(self: Text) => Bytes = (match self { Text(p0) => p0 });
+  // Decompose into the inner `String`, consuming the `Text`.
+  fn into_inner(self: Text) => Bytes = (match self { Text(p0) => p0 });
+  // Construct directly from a validated `String` (crate-internal use; bypass UTF-8 check).
+  //
+  // # Safety / invariant
+  // The caller must guarantee `s` is valid UTF-8. Rust `String` already enforces this, so
+  // this is safe by the type system; the function is `pub(crate)` to prevent external bypass.
+  // Declared: renamed `impl Text { fn from_string_unchecked }` -> `_4Text21from_string_unchecked` (D4 inherent-impl flat-fn desugar + DN-140 length-prefix mangle, M-664).
+  fn _4Text21from_string_unchecked(s: Bytes) => Text = Text(s);
+};

@@ -1,0 +1,140 @@
+{
+  "source": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/lib.rs",
+  "emitted_items": [
+    "co-include:BoundaryError,EncodeError,ParseErr,TranscodeError,Utf8Error",
+    "co-include:Text"
+  ],
+  "gaps": [
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/lib.rs",
+      "line": 1,
+      "col": 1,
+      "category": "InnerAttr",
+      "rust_construct": "InnerAttr",
+      "snippet": "# ! [forbid (unsafe_code)]",
+      "reason": "crate/file-level inner attributes (#![...]) are not transpiled (no nodule-header equivalent for these Rust-specific directives)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/lib.rs",
+      "line": 94,
+      "col": 1,
+      "category": "ModuleDecl",
+      "rust_construct": "ModuleDecl",
+      "snippet": "pub mod error ;",
+      "reason": "external `mod foo;` declaration — file-linkage, not translatable library surface (Mycelium's nodule-per-file model makes the module tree implicit in the file layout; the sibling file transpiles as its own nodule). Excluded from the expressible-fraction denominator, recorded not dropped",
+      "item_name": "error"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/lib.rs",
+      "line": 95,
+      "col": 1,
+      "category": "ModuleDecl",
+      "rust_construct": "ModuleDecl",
+      "snippet": "pub mod guarantee_matrix ;",
+      "reason": "external `mod foo;` declaration — file-linkage, not translatable library surface (Mycelium's nodule-per-file model makes the module tree implicit in the file layout; the sibling file transpiles as its own nodule). Excluded from the expressible-fraction denominator, recorded not dropped",
+      "item_name": "guarantee_matrix"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/lib.rs",
+      "line": 96,
+      "col": 1,
+      "category": "ModuleDecl",
+      "rust_construct": "ModuleDecl",
+      "snippet": "pub mod ops ;",
+      "reason": "external `mod foo;` declaration — file-linkage, not translatable library surface (Mycelium's nodule-per-file model makes the module tree implicit in the file layout; the sibling file transpiles as its own nodule). Excluded from the expressible-fraction denominator, recorded not dropped",
+      "item_name": "ops"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/lib.rs",
+      "line": 97,
+      "col": 1,
+      "category": "ModuleDecl",
+      "rust_construct": "ModuleDecl",
+      "snippet": "pub mod types ;",
+      "reason": "external `mod foo;` declaration — file-linkage, not translatable library surface (Mycelium's nodule-per-file model makes the module tree implicit in the file layout; the sibling file transpiles as its own nodule). Excluded from the expressible-fraction denominator, recorded not dropped",
+      "item_name": "types"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/lib.rs",
+      "line": 102,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "pub use types :: { Lossy , Text } ;",
+      "reason": "`use types::Lossy` — `Lossy` is not among sibling `types`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include:Text"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/lib.rs",
+      "line": 105,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "pub use ops :: { concat , from_chars , from_utf8 , join } ;",
+      "reason": "`use ops::concat` — `concat` is not among sibling `ops`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2); `use ops::from_chars` — `from_chars` is not among sibling `ops`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2); `use ops::from_utf8` — `from_utf8` is not among sibling `ops`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2); `use ops::join` — `join` is not among sibling `ops`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/lib.rs",
+      "line": 108,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "pub use ops :: { replace , to_lower , to_upper , trim } ;",
+      "reason": "`use ops::replace` — `replace` is not among sibling `ops`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2); `use ops::to_lower` — `to_lower` is not among sibling `ops`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2); `use ops::to_upper` — `to_upper` is not among sibling `ops`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2); `use ops::trim` — `trim` is not among sibling `ops`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/lib.rs",
+      "line": 111,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "pub use ops :: { chars , len_bytes , len_chars , len_graphemes } ;",
+      "reason": "`use ops::chars` — `chars` is not among sibling `ops`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2); `use ops::len_bytes` — `len_bytes` is not among sibling `ops`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2); `use ops::len_chars` — `len_chars` is not among sibling `ops`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2); `use ops::len_graphemes` — `len_graphemes` is not among sibling `ops`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/lib.rs",
+      "line": 114,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "pub use ops :: { char_at , slice } ;",
+      "reason": "`use ops::char_at` — `char_at` is not among sibling `ops`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2); `use ops::slice` — `slice` is not among sibling `ops`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/lib.rs",
+      "line": 117,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "pub use ops :: { parse_bool , parse_int } ;",
+      "reason": "`use ops::parse_bool` — `parse_bool` is not among sibling `ops`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2); `use ops::parse_int` — `parse_int` is not among sibling `ops`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/lib.rs",
+      "line": 120,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "pub use ops :: { encode_utf8 , from_utf16 , to_latin1 , to_latin1_lossy , to_utf16 } ;",
+      "reason": "`use ops::encode_utf8` — `encode_utf8` is not among sibling `ops`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2); `use ops::from_utf16` — `from_utf16` is not among sibling `ops`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2); `use ops::to_latin1` — `to_latin1` is not among sibling `ops`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2); `use ops::to_latin1_lossy` — `to_latin1_lossy` is not among sibling `ops`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2); `use ops::to_utf16` — `to_utf16` is not among sibling `ops`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/lib.rs",
+      "line": 124,
+      "col": 1,
+      "category": "TestItem",
+      "rust_construct": "TestItem",
+      "snippet": "# [cfg (test)] mod tests { # ! [doc = \" Crate-level integration tests that exercise the public API through the flat re-exports.\"] # ! [doc = \"\"] # ! [doc = \" Module-level unit tests live in their respective submodules (`ops::tests`,\"] # ! [doc = \" `error::tests`, `types::tests`, `guarantee_matrix::tests`). These tests verify\"] # ! [doc = \" the *integration* of the public API surface and assert the guarantee matrix\"] # ! [doc = \" conformance from the crate root.\"] use super :: * ; use crate :: guarantee_matrix :: MATRIX ; # [doc = \" The guarantee matrix is non-empty (at least one exported op).\"] # [test] fn guarantee_matrix_is_non_empty () { assert ! (! MATRIX . is_empty () , \"guarantee matrix must have at least one row\") ; } # [doc = \" Every row of the guarantee matrix is `Exact` and effect-free (C2 / C6).\"] # [doc = \" This is the crate-root assertion of the matrix invariant (asserted redundantly in\"] # [doc = \" `guarantee_matrix::tests`, duplicated here as an integration-level safety net).\"] # [test] fn guarantee_matrix_all_exact_effect_free () { for row in MATRIX { assert_eq ! (row . guarantee , \"Exact\" , \"op {:?} must be Exact (text has no accuracy semantics — C2 / VR-5)\" , row . op) ; assert_eq ! (row . effects , \"none\" , \"op {:?} must be effect-free (C6 — all text ops are pure)\" , row . op) ; } } # [doc = \" The `parse_int` honesty crux: `Result`, **never** a sentinel `0`.\"] # [doc = \"\"] # [doc = \" This is the central RFC-0016 §4.4 honesty obligation for `std.text`.\"] # [doc = \" Guard: if `parse_int` returned `0` instead of `Err` for malformed input, this fails.\"] # [test] fn honesty_crux_parse_int_never_sentinel_zero () { let cases : & [& str] = & [\"\" , \"abc\" , \"1.2\" , \"true\" , \" 1\" , \"1 \"] ; for s in cases { let result = parse_int (& Text :: new (s)) ; assert ! (result . is_err () , \"parse_int({s:?}) must be Err, not a sentinel 0 (RFC-0016 §4.4 honesty crux)\") ; } } # [doc = \" The `parse_bool` honesty crux: `Result`, **never** a sentinel `false`.\"] # [doc = \"\"] # [doc = \" Guard: if `parse_bool` returned `false` instead of `Err` for malformed input, this fails.\"] # [test] fn honesty_crux_parse_bool_never_sentinel_false () { let cases : & [& str] = & [\"\" , \"True\" , \"False\" , \"1\" , \"0\" , \"yes\" , \"no\" , \"TRUE\"] ; for s in cases { let result = parse_bool (& Text :: new (s)) ; assert ! (result . is_err () , \"parse_bool({s:?}) must be Err, not a sentinel false (RFC-0016 §4.4 honesty crux)\") ; } } # [doc = \" The `from_utf8` honesty crux: invalid bytes → `Err`, **never** silent U+FFFD.\"] # [doc = \"\"] # [doc = \" Guard: if `from_utf8` inserted U+FFFD for invalid bytes instead of returning `Err`, this fails.\"] # [test] fn honesty_crux_from_utf8_never_silent_fffd () { let result = from_utf8 (& [0xFF]) ; assert ! (result . is_err () , \"invalid UTF-8 must be Err, never silent U+FFFD (C1 / G2)\") ; if let Ok (t) = result { assert_ne ! (t . as_str () , \"\\u{FFFD}\" , \"must not silently substitute U+FFFD for invalid UTF-8\") ; } } # [doc = \" The `to_latin1` honesty crux: non-Latin-1 chars → `Err`, **never** silent U+FFFD.\"] # [doc = \"\"] # [doc = \" Guard: returning Ok with '?' for unrepresentable chars makes this fail.\"] # [test] fn honesty_crux_to_latin1_never_silent_fffd () { let t = Text :: new (\"€\") ; let result = to_latin1 (& t) ; assert ! (result . is_err () , \"non-Latin-1 char must be Err, never silent U+FFFD (C1 / G2)\") ; } # [doc = \" The `to_latin1_lossy` honesty crux: lossiness is **un-droppable** (G2 / C1).\"] # [doc = \"\"] # [doc = \" The caller cannot get lossy output without seeing the substitution count; it is always\"] # [doc = \" in the `Lossy` return value.\"] # [doc = \"\"] # [doc = \" Guard: if `to_latin1_lossy` returned `Vec<u8>` directly (hiding the count), this fails\"] # [doc = \" to compile (the type enforces the guarantee).\"] # [test] fn honesty_crux_to_latin1_lossy_count_is_not_droppable () { let t = Text :: new (\"hello €\") ; let result : Lossy < Vec < u8 > > = to_latin1_lossy (& t , '?') ; assert_eq ! (result . substituted , 1 , \"substitution count must be in the Lossy value\") ; assert_eq ! (result . marker , '?') ; } # [doc = \" The `slice` honesty crux: out-of-range → `Err`, **never** a silent truncation.\"] # [doc = \"\"] # [doc = \" Guard: if `slice` silently truncated to the string length instead of returning `Err`,\"] # [doc = \" this fails.\"] # [test] fn honesty_crux_slice_never_silent_truncation () { let t = Text :: new (\"hi\") ; let result = slice (& t , 0 , 100) ; assert ! (result . is_err () , \"out-of-range slice must be Err, never a silent truncation (C1 / G2)\") ; } # [doc = \" The `char_at` honesty crux: out-of-range → `Err`, **never** a sentinel char.\"] # [doc = \"\"] # [doc = \" Guard: returning '\\\\0' for an out-of-range index makes this fail.\"] # [test] fn honesty_crux_char_at_never_sentinel_char () { let t = Text :: new (\"hi\") ; let result = char_at (& t , 100) ; assert ! (result . is_err () , \"out-of-range char_at must be Err, never a sentinel char (C1 / G2)\") ; } # [doc = \" Every transform returns a NEW Text; the original is unmodified (C4 — value-semantic).\"] # [test] fn c4_transforms_never_mutate_original () { let original = Text :: new (\"Hello World\") ; let _upper = to_upper (& original) ; let _lower = to_lower (& original) ; let _trimmed = trim (& original) ; let _replaced = replace (& original , & Text :: new (\"World\") , & Text :: new (\"Rust\")) ; assert_eq ! (original . as_str () , \"Hello World\" , \"C4 — transforms must never mutate the original\") ; } # [doc = \" Repeated calls to any deterministic op return the same result (C6 / C2 — no randomness,\"] # [doc = \" no global state, no time dependency).\"] # [test] fn c6_all_ops_are_deterministic () { let t = Text :: new (\"hello\") ; assert_eq ! (to_upper (& t) , to_upper (& t)) ; assert_eq ! (to_lower (& t) , to_lower (& t)) ; assert_eq ! (trim (& t) , trim (& t)) ; assert_eq ! (len_bytes (& t) , len_bytes (& t)) ; assert_eq ! (len_chars (& t) , len_chars (& t)) ; assert_eq ! (chars (& t) , chars (& t)) ; assert_eq ! (encode_utf8 (& t) , encode_utf8 (& t)) ; assert_eq ! (to_utf16 (& t) , to_utf16 (& t)) ; assert_eq ! (parse_int (& Text :: new (\"42\")) , parse_int (& Text :: new (\"42\"))) ; assert_eq ! (parse_bool (& Text :: new (\"true\")) , parse_bool (& Text :: new (\"true\"))) ; } }",
+      "reason": "#[cfg(test)] item — out of scope for this PoC's transpilation surface (excluded from the expressible-fraction denominator, but recorded, never silently skipped)",
+      "item_name": "tests"
+    }
+  ],
+  "total_top_level_items": 13
+}

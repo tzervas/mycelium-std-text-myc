@@ -1,0 +1,210 @@
+{
+  "source": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/types.rs",
+  "emitted_items": [
+    "Text",
+    "impl Text"
+  ],
+  "gaps": [
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/types.rs",
+      "line": 21,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use std :: fmt ;",
+      "reason": "`use std::fmt` — `std` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/types.rs",
+      "line": 25,
+      "col": 1,
+      "category": "NamedFieldDrop",
+      "rust_construct": "NamedFieldDrop",
+      "snippet": "# [doc = \" An immutable, UTF-8 encoded string value (spec §1 / §3).\"] # [doc = \"\"] # [doc = \" Invariant: the internal bytes are always valid UTF-8.\"] # [doc = \"\"] # [doc = \" Value-semantic: two `Text` values with identical bytes compare as equal (content-addressed,\"] # [doc = \" RFC-0001 §4.6); every transform returns a new `Text` (C4 / ADR-003 — metadata is not\"] # [doc = \" identity; immutability is the structural form of C4 for text).\"] # [doc = \"\"] # [doc = \" # Guarantee tag: `Exact`\"] # [doc = \" `Text` carries no accuracy/precision semantics. Construction either succeeds (valid UTF-8)\"] # [doc = \" or returns an explicit `Err` (C1 — never-silent).\"] # [derive (Debug , Clone , PartialEq , Eq , Hash)] pub struct Text { inner : String , }",
+      "reason": "struct `Text` named field(s) `inner` emitted positionally as `Text(Bytes)` — Mycelium's `constructor` is positional-only (no record surface); product structure preserved, field names dropped (matches `lib/std/*.myc` hand-ports)",
+      "item_name": "Text"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/types.rs",
+      "line": 25,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" An immutable, UTF-8 encoded string value (spec §1 / §3).\"] # [doc = \"\"] # [doc = \" Invariant: the internal bytes are always valid UTF-8.\"] # [doc = \"\"] # [doc = \" Value-semantic: two `Text` values with identical bytes compare as equal (content-addressed,\"] # [doc = \" RFC-0001 §4.6); every transform returns a new `Text` (C4 / ADR-003 — metadata is not\"] # [doc = \" identity; immutability is the structural form of C4 for text).\"] # [doc = \"\"] # [doc = \" # Guarantee tag: `Exact`\"] # [doc = \" `Text` carries no accuracy/precision semantics. Construction either succeeds (valid UTF-8)\"] # [doc = \" or returns an explicit `Err` (C1 — never-silent).\"] # [derive (Debug , Clone , PartialEq , Eq , Hash)] pub struct Text { inner : String , }",
+      "reason": "struct `Text` derive(Clone) is a satisfied no-op under Mycelium's value semantics (ADR-003 — every value already copies structurally; DN-128 §6.1) — not emitted as an impl, not a gap",
+      "item_name": "Text"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/types.rs",
+      "line": 25,
+      "col": 1,
+      "category": "DeriveAttr",
+      "rust_construct": "DeriveAttr",
+      "snippet": "# [doc = \" An immutable, UTF-8 encoded string value (spec §1 / §3).\"] # [doc = \"\"] # [doc = \" Invariant: the internal bytes are always valid UTF-8.\"] # [doc = \"\"] # [doc = \" Value-semantic: two `Text` values with identical bytes compare as equal (content-addressed,\"] # [doc = \" RFC-0001 §4.6); every transform returns a new `Text` (C4 / ADR-003 — metadata is not\"] # [doc = \" identity; immutability is the structural form of C4 for text).\"] # [doc = \"\"] # [doc = \" # Guarantee tag: `Exact`\"] # [doc = \" `Text` carries no accuracy/precision semantics. Construction either succeeds (valid UTF-8)\"] # [doc = \" or returns an explicit `Err` (C1 — never-silent).\"] # [derive (Debug , Clone , PartialEq , Eq , Hash)] pub struct Text { inner : String , }",
+      "reason": "struct `Text` derive(...) names Eq not in the DN-128 standard-derive set this leaf builds (Debug/Default/Clone/Copy/PartialEq/PartialOrd/Hash all recognized; bare Eq/Ord are deliberately NOT recognized — see emit/derives/mod.rs::TABLE's doc for why) — dropped, no confirmed Mycelium surface",
+      "item_name": "Text"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/types.rs",
+      "line": 41,
+      "col": 1,
+      "category": "DeriveAttr",
+      "rust_construct": "DeriveAttr",
+      "snippet": "impl Text { # [doc = \" Construct a `Text` from a `&str` slice (total — any `&str` is valid UTF-8).\"] # [doc = \"\"] # [doc = \" This is a pure convenience constructor. The `FromStr` trait implementation delegates here.\"] # [doc = \"\"] # [doc = \" # Guarantee: `Exact` / total\"] # [doc = \" Every `&str` is already validated UTF-8 by Rust's type system; this cannot fail.\"] # [must_use] pub fn new (s : & str) -> Text { Text { inner : s . to_owned () , } } # [doc = \" View the internal UTF-8 bytes as a `&str` (total, by-invariant).\"] # [must_use] pub fn as_str (& self) -> & str { & self . inner } # [doc = \" View the internal bytes.\"] # [must_use] pub fn as_bytes (& self) -> & [u8] { self . inner . as_bytes () } # [doc = \" The length in bytes (C2: `Exact`; total).\"] # [must_use] pub fn len_bytes (& self) -> usize { self . inner . len () } # [doc = \" Is the text empty (zero bytes)?\"] # [must_use] pub fn is_empty (& self) -> bool { self . inner . is_empty () } # [doc = \" Decompose into the inner `String`, consuming the `Text`.\"] # [must_use] pub fn into_inner (self) -> String { self . inner } # [doc = \" Construct directly from a validated `String` (crate-internal use; bypass UTF-8 check).\"] # [doc = \"\"] # [doc = \" # Safety / invariant\"] # [doc = \" The caller must guarantee `s` is valid UTF-8. Rust `String` already enforces this, so\"] # [doc = \" this is safe by the type system; the function is `pub(crate)` to prevent external bypass.\"] pub (crate) fn from_string_unchecked (s : String) -> Text { Text { inner : s } } }",
+      "reason": "dropped non-doc attribute(s) on method `new`: # [must_use]",
+      "item_name": "impl Text"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/types.rs",
+      "line": 41,
+      "col": 1,
+      "category": "DeriveAttr",
+      "rust_construct": "DeriveAttr",
+      "snippet": "impl Text { # [doc = \" Construct a `Text` from a `&str` slice (total — any `&str` is valid UTF-8).\"] # [doc = \"\"] # [doc = \" This is a pure convenience constructor. The `FromStr` trait implementation delegates here.\"] # [doc = \"\"] # [doc = \" # Guarantee: `Exact` / total\"] # [doc = \" Every `&str` is already validated UTF-8 by Rust's type system; this cannot fail.\"] # [must_use] pub fn new (s : & str) -> Text { Text { inner : s . to_owned () , } } # [doc = \" View the internal UTF-8 bytes as a `&str` (total, by-invariant).\"] # [must_use] pub fn as_str (& self) -> & str { & self . inner } # [doc = \" View the internal bytes.\"] # [must_use] pub fn as_bytes (& self) -> & [u8] { self . inner . as_bytes () } # [doc = \" The length in bytes (C2: `Exact`; total).\"] # [must_use] pub fn len_bytes (& self) -> usize { self . inner . len () } # [doc = \" Is the text empty (zero bytes)?\"] # [must_use] pub fn is_empty (& self) -> bool { self . inner . is_empty () } # [doc = \" Decompose into the inner `String`, consuming the `Text`.\"] # [must_use] pub fn into_inner (self) -> String { self . inner } # [doc = \" Construct directly from a validated `String` (crate-internal use; bypass UTF-8 check).\"] # [doc = \"\"] # [doc = \" # Safety / invariant\"] # [doc = \" The caller must guarantee `s` is valid UTF-8. Rust `String` already enforces this, so\"] # [doc = \" this is safe by the type system; the function is `pub(crate)` to prevent external bypass.\"] pub (crate) fn from_string_unchecked (s : String) -> Text { Text { inner : s } } }",
+      "reason": "dropped non-doc attribute(s) on method `as_str`: # [must_use]",
+      "item_name": "impl Text"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/types.rs",
+      "line": 41,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "impl Text { # [doc = \" Construct a `Text` from a `&str` slice (total — any `&str` is valid UTF-8).\"] # [doc = \"\"] # [doc = \" This is a pure convenience constructor. The `FromStr` trait implementation delegates here.\"] # [doc = \"\"] # [doc = \" # Guarantee: `Exact` / total\"] # [doc = \" Every `&str` is already validated UTF-8 by Rust's type system; this cannot fail.\"] # [must_use] pub fn new (s : & str) -> Text { Text { inner : s . to_owned () , } } # [doc = \" View the internal UTF-8 bytes as a `&str` (total, by-invariant).\"] # [must_use] pub fn as_str (& self) -> & str { & self . inner } # [doc = \" View the internal bytes.\"] # [must_use] pub fn as_bytes (& self) -> & [u8] { self . inner . as_bytes () } # [doc = \" The length in bytes (C2: `Exact`; total).\"] # [must_use] pub fn len_bytes (& self) -> usize { self . inner . len () } # [doc = \" Is the text empty (zero bytes)?\"] # [must_use] pub fn is_empty (& self) -> bool { self . inner . is_empty () } # [doc = \" Decompose into the inner `String`, consuming the `Text`.\"] # [must_use] pub fn into_inner (self) -> String { self . inner } # [doc = \" Construct directly from a validated `String` (crate-internal use; bypass UTF-8 check).\"] # [doc = \"\"] # [doc = \" # Safety / invariant\"] # [doc = \" The caller must guarantee `s` is valid UTF-8. Rust `String` already enforces this, so\"] # [doc = \" this is safe by the type system; the function is `pub(crate)` to prevent external bypass.\"] pub (crate) fn from_string_unchecked (s : String) -> Text { Text { inner : s } } }",
+      "reason": "impl method `as_bytes` body: method call `.as_bytes(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__as_bytes` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `as_bytes(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered)",
+      "item_name": "impl Text"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/types.rs",
+      "line": 41,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "impl Text { # [doc = \" Construct a `Text` from a `&str` slice (total — any `&str` is valid UTF-8).\"] # [doc = \"\"] # [doc = \" This is a pure convenience constructor. The `FromStr` trait implementation delegates here.\"] # [doc = \"\"] # [doc = \" # Guarantee: `Exact` / total\"] # [doc = \" Every `&str` is already validated UTF-8 by Rust's type system; this cannot fail.\"] # [must_use] pub fn new (s : & str) -> Text { Text { inner : s . to_owned () , } } # [doc = \" View the internal UTF-8 bytes as a `&str` (total, by-invariant).\"] # [must_use] pub fn as_str (& self) -> & str { & self . inner } # [doc = \" View the internal bytes.\"] # [must_use] pub fn as_bytes (& self) -> & [u8] { self . inner . as_bytes () } # [doc = \" The length in bytes (C2: `Exact`; total).\"] # [must_use] pub fn len_bytes (& self) -> usize { self . inner . len () } # [doc = \" Is the text empty (zero bytes)?\"] # [must_use] pub fn is_empty (& self) -> bool { self . inner . is_empty () } # [doc = \" Decompose into the inner `String`, consuming the `Text`.\"] # [must_use] pub fn into_inner (self) -> String { self . inner } # [doc = \" Construct directly from a validated `String` (crate-internal use; bypass UTF-8 check).\"] # [doc = \"\"] # [doc = \" # Safety / invariant\"] # [doc = \" The caller must guarantee `s` is valid UTF-8. Rust `String` already enforces this, so\"] # [doc = \" this is safe by the type system; the function is `pub(crate)` to prevent external bypass.\"] pub (crate) fn from_string_unchecked (s : String) -> Text { Text { inner : s } } }",
+      "reason": "impl method `len_bytes` body: method call `.len(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__len` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `len(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered)",
+      "item_name": "impl Text"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/types.rs",
+      "line": 41,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "impl Text { # [doc = \" Construct a `Text` from a `&str` slice (total — any `&str` is valid UTF-8).\"] # [doc = \"\"] # [doc = \" This is a pure convenience constructor. The `FromStr` trait implementation delegates here.\"] # [doc = \"\"] # [doc = \" # Guarantee: `Exact` / total\"] # [doc = \" Every `&str` is already validated UTF-8 by Rust's type system; this cannot fail.\"] # [must_use] pub fn new (s : & str) -> Text { Text { inner : s . to_owned () , } } # [doc = \" View the internal UTF-8 bytes as a `&str` (total, by-invariant).\"] # [must_use] pub fn as_str (& self) -> & str { & self . inner } # [doc = \" View the internal bytes.\"] # [must_use] pub fn as_bytes (& self) -> & [u8] { self . inner . as_bytes () } # [doc = \" The length in bytes (C2: `Exact`; total).\"] # [must_use] pub fn len_bytes (& self) -> usize { self . inner . len () } # [doc = \" Is the text empty (zero bytes)?\"] # [must_use] pub fn is_empty (& self) -> bool { self . inner . is_empty () } # [doc = \" Decompose into the inner `String`, consuming the `Text`.\"] # [must_use] pub fn into_inner (self) -> String { self . inner } # [doc = \" Construct directly from a validated `String` (crate-internal use; bypass UTF-8 check).\"] # [doc = \"\"] # [doc = \" # Safety / invariant\"] # [doc = \" The caller must guarantee `s` is valid UTF-8. Rust `String` already enforces this, so\"] # [doc = \" this is safe by the type system; the function is `pub(crate)` to prevent external bypass.\"] pub (crate) fn from_string_unchecked (s : String) -> Text { Text { inner : s } } }",
+      "reason": "impl method `is_empty` body: method call `.is_empty(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__is_empty` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `is_empty(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered)",
+      "item_name": "impl Text"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/types.rs",
+      "line": 41,
+      "col": 1,
+      "category": "DeriveAttr",
+      "rust_construct": "DeriveAttr",
+      "snippet": "impl Text { # [doc = \" Construct a `Text` from a `&str` slice (total — any `&str` is valid UTF-8).\"] # [doc = \"\"] # [doc = \" This is a pure convenience constructor. The `FromStr` trait implementation delegates here.\"] # [doc = \"\"] # [doc = \" # Guarantee: `Exact` / total\"] # [doc = \" Every `&str` is already validated UTF-8 by Rust's type system; this cannot fail.\"] # [must_use] pub fn new (s : & str) -> Text { Text { inner : s . to_owned () , } } # [doc = \" View the internal UTF-8 bytes as a `&str` (total, by-invariant).\"] # [must_use] pub fn as_str (& self) -> & str { & self . inner } # [doc = \" View the internal bytes.\"] # [must_use] pub fn as_bytes (& self) -> & [u8] { self . inner . as_bytes () } # [doc = \" The length in bytes (C2: `Exact`; total).\"] # [must_use] pub fn len_bytes (& self) -> usize { self . inner . len () } # [doc = \" Is the text empty (zero bytes)?\"] # [must_use] pub fn is_empty (& self) -> bool { self . inner . is_empty () } # [doc = \" Decompose into the inner `String`, consuming the `Text`.\"] # [must_use] pub fn into_inner (self) -> String { self . inner } # [doc = \" Construct directly from a validated `String` (crate-internal use; bypass UTF-8 check).\"] # [doc = \"\"] # [doc = \" # Safety / invariant\"] # [doc = \" The caller must guarantee `s` is valid UTF-8. Rust `String` already enforces this, so\"] # [doc = \" this is safe by the type system; the function is `pub(crate)` to prevent external bypass.\"] pub (crate) fn from_string_unchecked (s : String) -> Text { Text { inner : s } } }",
+      "reason": "dropped non-doc attribute(s) on method `into_inner`: # [must_use]",
+      "item_name": "impl Text"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/types.rs",
+      "line": 96,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl fmt :: Display for Text { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { f . write_str (& self . inner) } }",
+      "reason": "trait-impl of non-prelude trait `Display` — no ambient trait definition and synthetic trait emission is refused (DN-34 §8.8 / DN-122 MVP); gapped the whole impl so the residual cannot file-poison myc-check (G2; express gap-close 2026-07-16)",
+      "item_name": "Text"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/types.rs",
+      "line": 102,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl From < String > for Text { fn from (s : String) -> Self { Text { inner : s } } }",
+      "reason": "trait-impl of non-prelude trait `From` — no ambient trait definition and synthetic trait emission is refused (DN-34 §8.8 / DN-122 MVP); gapped the whole impl so the residual cannot file-poison myc-check (G2; express gap-close 2026-07-16)",
+      "item_name": "Text"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/types.rs",
+      "line": 108,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl From < & str > for Text { fn from (s : & str) -> Self { Text :: new (s) } }",
+      "reason": "trait-impl of non-prelude trait `From` — no ambient trait definition and synthetic trait emission is refused (DN-34 §8.8 / DN-122 MVP); gapped the whole impl so the residual cannot file-poison myc-check (G2; express gap-close 2026-07-16)",
+      "item_name": "Text"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/types.rs",
+      "line": 114,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl std :: str :: FromStr for Text { # [doc = \" `Text::new` is infallible; `Text`'s `FromStr` impl is also infallible: every `&str` is valid UTF-8 by Rust's type system.\"] # [doc = \" The error type is `std::convert::Infallible` (the never-fails error).\"] type Err = std :: convert :: Infallible ; fn from_str (s : & str) -> Result < Self , Self :: Err > { Ok (Text :: new (s)) } }",
+      "reason": "trait-impl of non-prelude trait `FromStr` — no ambient trait definition and synthetic trait emission is refused (DN-34 §8.8 / DN-122 MVP); gapped the whole impl so the residual cannot file-poison myc-check (G2; express gap-close 2026-07-16)",
+      "item_name": "Text"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/types.rs",
+      "line": 124,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl AsRef < str > for Text { fn as_ref (& self) -> & str { self . as_str () } }",
+      "reason": "trait-impl of non-prelude trait `AsRef` — no ambient trait definition and synthetic trait emission is refused (DN-34 §8.8 / DN-122 MVP); gapped the whole impl so the residual cannot file-poison myc-check (G2; express gap-close 2026-07-16)",
+      "item_name": "Text"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/types.rs",
+      "line": 130,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl PartialEq < str > for Text { fn eq (& self , other : & str) -> bool { self . inner == other } }",
+      "reason": "trait-impl of non-prelude trait `PartialEq` — no ambient trait definition and synthetic trait emission is refused (DN-34 §8.8 / DN-122 MVP); gapped the whole impl so the residual cannot file-poison myc-check (G2; express gap-close 2026-07-16)",
+      "item_name": "Text"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/types.rs",
+      "line": 136,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl PartialEq < & str > for Text { fn eq (& self , other : & & str) -> bool { self . inner == * other } }",
+      "reason": "trait-impl of non-prelude trait `PartialEq` — no ambient trait definition and synthetic trait emission is refused (DN-34 §8.8 / DN-122 MVP); gapped the whole impl so the residual cannot file-poison myc-check (G2; express gap-close 2026-07-16)",
+      "item_name": "Text"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/types.rs",
+      "line": 144,
+      "col": 1,
+      "category": "Struct",
+      "rust_construct": "Struct",
+      "snippet": "# [doc = \" The **type-level opt-in** to lossy transcoding (spec §3 / C1 / G2).\"] # [doc = \"\"] # [doc = \" A `Lossy<T>` is the only way to receive a value that was produced by substituting characters\"] # [doc = \" that were not representable in the target encoding. The `substituted` count and `marker`\"] # [doc = \" character are always present in the value — the lossiness is **un-droppable** (G2 / C1).\"] # [doc = \"\"] # [doc = \" The default replacement character is U+FFFD (the Unicode replacement character). A caller\"] # [doc = \" who wants a different replacement character passes it explicitly to `*_lossy` operations.\"] # [doc = \"\"] # [doc = \" # FLAG — Q1 (Lossy opt-in shape)\"] # [doc = \" This is a distinct type per spec §7-Q1's proposed disposition. Whether the replacement marker\"] # [doc = \" should be configurable (as here, via `marker`) vs fixed at U+FFFD is pending maintainer\"] # [doc = \" decision. The `marker` field exists to anticipate the configurable direction without guessing\"] # [doc = \" (G2 / VR-5).\"] # [doc = \"\"] # [doc = \" # Guarantee tag: `Exact` / total\"] # [doc = \" The `Lossy` wrapper itself carries no accuracy semantics — it is a total, value-semantic\"] # [doc = \" record of what was substituted. The `substituted` count is `Exact` (an exact integer count\"] # [doc = \" of the substitutions that occurred).\"] # [derive (Debug , Clone , PartialEq , Eq)] pub struct Lossy < T > { # [doc = \" The transcoded/encoded value (with substitutions applied).\"] pub value : T , # [doc = \" The count of characters that were substituted.\"] pub substituted : usize , # [doc = \" The replacement character that was used (default U+FFFD).\"] pub marker : char , }",
+      "reason": "struct `Lossy` uses named fields and references a type not resolvable in-file — emitting it positionally would introduce an unresolved reference that poisons the file's `myc check`; left gapped under the M-1006 resolvability gate (VR-5/G2)",
+      "item_name": "Lossy"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/types.rs",
+      "line": 173,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl < T > Lossy < T > { # [doc = \" Construct a `Lossy<T>` with a given value, substitution count, and marker.\"] # [must_use] pub fn new (value : T , substituted : usize , marker : char) -> Self { Lossy { value , substituted , marker , } } # [doc = \" Construct a `Lossy<T>` using the default U+FFFD replacement marker.\"] # [must_use] pub fn with_default_marker (value : T , substituted : usize) -> Self { Lossy { value , substituted , marker : '\\u{FFFD}' , } } # [doc = \" Whether any substitutions occurred (convenience; the caller can also inspect `substituted`).\"] # [must_use] pub fn is_lossless (& self) -> bool { self . substituted == 0 } }",
+      "reason": "no member of this impl block could be transpiled (3 sub-issue(s)): impl method `new` body: struct literal `Lossy { .. }` — not an in-file single-ctor struct or enum struct-variant that emits (no constructor to build; a cross-nodule variant is an honest DN-113/DN-134-OQ-2 resolvability gap, never a fabricated out-of-file reference — VR-5/G2); impl method `with_default_marker` body: struct literal `Lossy { .. }` — not an in-file single-ctor struct or enum struct-variant that emits (no constructor to build; a cross-nodule variant is an honest DN-113/DN-134-OQ-2 resolvability gap, never a fabricated out-of-file reference — VR-5/G2); impl method `is_lossless` body: field projection `self.substituted` on `Lossy[T]` — not an in-file single-ctor struct that emits (an enum / external / non-resolvable type has no constructor to `match` against)",
+      "item_name": "Lossy < T >"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-std-text/src/types.rs",
+      "line": 203,
+      "col": 1,
+      "category": "TestItem",
+      "rust_construct": "TestItem",
+      "snippet": "# [cfg (test)] mod tests { use super :: * ; # [doc = \" `Text::new` round-trips: the content is exactly the input (C4 — exact).\"] # [test] fn text_new_round_trips () { let t = Text :: new (\"hello\") ; assert_eq ! (t . as_str () , \"hello\") ; } # [doc = \" Empty text is empty and reports zero bytes.\"] # [test] fn text_empty () { let t = Text :: new (\"\") ; assert ! (t . is_empty ()) ; assert_eq ! (t . len_bytes () , 0) ; } # [doc = \" Multi-byte UTF-8 strings are preserved exactly (C4).\"] # [test] fn text_new_preserves_multibyte_utf8 () { let s = \"café\" ; let t = Text :: new (s) ; assert_eq ! (t . as_str () , s) ; assert_eq ! (t . len_bytes () , s . len ()) ; } # [doc = \" `Text` equality is content-addressed: two texts with equal bytes are equal (RFC-0001 §4.6 / C4).\"] # [test] fn text_equality_is_content_addressed () { let a = Text :: new (\"hello\") ; let b = Text :: new (\"hello\") ; assert_eq ! (a , b , \"texts with equal content must be equal (C4 / RFC-0001 §4.6)\") ; } # [doc = \" Texts with different content are not equal.\"] # [test] fn text_different_content_not_equal () { let a = Text :: new (\"hello\") ; let b = Text :: new (\"world\") ; assert_ne ! (a , b) ; } # [doc = \" `Display` renders the text content verbatim.\"] # [test] fn text_display_is_content () { let t = Text :: new (\"greet\") ; assert_eq ! (t . to_string () , \"greet\") ; } # [doc = \" `From<String>` and `From<&str>` both yield the correct text.\"] # [test] fn text_from_conversions () { let t1 = Text :: from (\"hello\") ; let t2 = Text :: from (String :: from (\"hello\")) ; assert_eq ! (t1 , t2) ; } # [doc = \" `AsRef<str>` exposes the underlying string slice.\"] # [test] fn text_as_ref_str () { let t = Text :: new (\"test\") ; let s : & str = t . as_ref () ; assert_eq ! (s , \"test\") ; } # [doc = \" `Lossy::with_default_marker` uses U+FFFD (the spec's proposed default marker).\"] # [test] fn lossy_default_marker_is_replacement_char () { let l = Lossy :: < Vec < u8 > > :: with_default_marker (vec ! [0x3F] , 2) ; assert_eq ! (l . marker , '\\u{FFFD}') ; assert_eq ! (l . substituted , 2) ; } # [doc = \" `Lossy::is_lossless` returns true iff `substituted == 0`.\"] # [test] fn lossy_is_lossless_iff_zero_substitutions () { let lossless = Lossy :: < Vec < u8 > > :: with_default_marker (vec ! [] , 0) ; let lossy = Lossy :: < Vec < u8 > > :: with_default_marker (vec ! [0x3F] , 1) ; assert ! (lossless . is_lossless () , \"zero substitutions → lossless\") ; assert ! (! lossy . is_lossless () , \"one substitution → not lossless\") ; } # [doc = \" `Lossy` carries the substitution count in the value — it is un-droppable (G2 / C1).\"] # [doc = \" Guard: a struct with no `substituted` field would make this assertion fail.\"] # [test] fn lossy_substitution_count_is_in_the_value () { let l = Lossy :: new (vec ! [b'?'] , 3_usize , '?') ; assert_eq ! (l . substituted , 3 , \"substitution count must be in the Lossy value (G2 / C1)\") ; assert_eq ! (l . marker , '?') ; } # [doc = \" Equality: two `Lossy` values are equal iff their `value`, `substituted`, and `marker` are\"] # [doc = \" equal (content-addressed).\"] # [test] fn lossy_equality_considers_all_fields () { let a = Lossy :: new (vec ! [b'x'] , 1_usize , '\\u{FFFD}') ; let b = Lossy :: new (vec ! [b'x'] , 1_usize , '\\u{FFFD}') ; let c = Lossy :: new (vec ! [b'x'] , 2_usize , '\\u{FFFD}') ; assert_eq ! (a , b) ; assert_ne ! (a , c , \"different substitution counts must not be equal\") ; } }",
+      "reason": "#[cfg(test)] item — out of scope for this PoC's transpilation surface (excluded from the expressible-fraction denominator, but recorded, never silently skipped)",
+      "item_name": "tests"
+    }
+  ],
+  "total_top_level_items": 13
+}

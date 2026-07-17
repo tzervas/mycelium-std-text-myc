@@ -1,0 +1,43 @@
+// nodule: std.text.ops
+// Operations on [`Text`] (spec §3 — the exported-op surface).
+//
+// All operations here are **pure** (C6: no IO, no time, no randomness, no global state).
+//
+// # Guarantee tags
+//
+// Every op is `Exact` (spec §4 — `text` has no accuracy/precision semantics). The honesty load
+// is the **fallibility column**: every restricted op returns an explicit error set, never a
+// sentinel, a clamp, or a partial result (C1 / G2).
+//
+// # Grouping
+//
+// - **Construction** (`from_chars`, `from_utf8`, `concat`, `join`): total except `from_utf8`.
+// - **Immutable transforms** (`to_upper`, `to_lower`, `trim`, `replace`): all total; return a
+//   **new** `Text` (never in-place — C4 / value-semantic).
+// - **Length / iteration** (`len_bytes`, `len_chars`, `len_graphemes`, `chars`): all total.
+// - **Slicing / indexing** (`slice`, `char_at`): fallible on invalid boundary or out-of-range.
+// - **Parse** (`parse_int`, `parse_bool`): fallible; `Result`, never a sentinel.
+// - **Encoding / transcoding** (`encode_utf8`, `to_utf16`, `to_latin1`, `to_latin1_lossy`,
+//   `from_utf16`): total for lossless directions; `Err` on lossy / invalid input (strict); the
+//   distinct `*_lossy` variant is the only way to receive substitution.
+//
+// # Scope note
+//
+// - **Ordering / equality** is out of scope here → `cmp` (M-532).
+// - **Serializing bytes to the wire** is out of scope → `io`/`serialize` (M-514).
+// - **Projection of other values to text** (`display`/`debug`) is out of scope → `fmt` (M-533).
+// - **Numeric value semantics** of a parsed integer → `math`/`numerics` (M-525/M-512).
+// @summary: best-effort transpilation via mycelium-transpile (M-873). Declared,
+// unvalidated — no Mycelium parser/typechecker confirms this output; see the
+// accompanying .gap.json for every construct this pass could not express.
+nodule std.text.ops;
+
+// EXPLAIN (L2-B/DN-124): Declared co-include of batch-sibling type surface (homes: std.text.error) so single-file oracle is self-contained — not a language `use` identity, not a short-form path collapse (M-1084 full path retained as provenance). Transitive type deps in the same batch are co-included. G2/VR-5.
+type BoundaryError = OutOfRange(Binary{64}, Binary{64}) | NotCharBoundary(Binary{64}) | NotGraphemeBoundary(Binary{64}) | InvalidRange(Binary{64}, Binary{64});
+type EncodeError = Unrepresentable(Binary{32}, Binary{64}, Bytes);
+type ParseErr = Empty | Invalid(Binary{64}, Bytes, Bytes) | OutOfRange(Binary{64}, Bytes);
+type TranscodeError = UnpairedSurrogate(Binary{64}) | Invalid(Binary{64});
+type Utf8Error = Invalid(Binary{64}, Bytes);
+
+// EXPLAIN (L2-B/DN-124): Declared co-include of batch-sibling type surface (homes: std.text.types) so single-file oracle is self-contained — not a language `use` identity, not a short-form path collapse (M-1084 full path retained as provenance). Transitive type deps in the same batch are co-included. G2/VR-5.
+type Text = Text(Bytes);

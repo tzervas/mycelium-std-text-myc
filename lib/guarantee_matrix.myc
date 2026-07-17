@@ -1,0 +1,42 @@
+// nodule: std.text.guarantee_matrix
+// The `std.text` guarantee matrix encoded as **data** (RFC-0016 §4.5; spec §4).
+//
+// Every exported operation has one row in [`MATRIX`]. The matrix is the load-bearing C2
+// deliverable (RFC-0016 §4.1 C2 / VR-5): guarantee tags are asserted in tests, not prose-only.
+//
+// # Guarantee tag justification (all `Exact`)
+//
+// `std.text` carries **no accuracy/precision/probability semantics** — there is no ε bound, no
+// probability, no approximation. A string op either returns the correct characters/bytes or an
+// explicit `Err`. Per RFC-0016 §4.1 C2: "an op with no accuracy semantics … is simply `Exact`".
+// The `Exact` tag for each row is the *honest floor*, not an overclaim.
+//
+// The honesty load is entirely in the **fallibility column**: every restricted op names its
+// explicit error set, carries **where** it failed (byte/char index), and never returns a
+// sentinel, a clamp, or a partial result (C1 / G2).
+//
+// # Fallibility column
+// - `"total"` — the op cannot fail for any well-formed input.
+// - Anything else — the explicit `Result`/`Option` shape and the error set.
+//
+// # Effects column
+// Every op is effect-free (C6: no IO, time, randomness, or global state).
+//
+// # EXPLAIN-able column
+// `"yes"` for ops that can reject/fail (their error type is the inspectable EXPLAIN artifact
+// per RFC-0013 §4.1 I1). `"n/a"` for total ops that neither select, convert, nor approximate.
+// @summary: best-effort transpilation via mycelium-transpile (M-873). Declared,
+// unvalidated — no Mycelium parser/typechecker confirms this output; see the
+// accompanying .gap.json for every construct this pass could not express.
+nodule std.text.guarantee_matrix;
+
+// One row in the `std.text` guarantee matrix (RFC-0016 §4.5).
+type MatrixRow = MatrixRow(Bytes, Bytes, Bytes, Bytes, Bytes);
+
+impl Show[MatrixRow] for MatrixRow {
+  fn render(x: MatrixRow) => Bytes =
+    match x { MatrixRow(p0, p1, p2, p3, p4) => bytes_concat(bytes_concat(bytes_concat(bytes_concat(bytes_concat(bytes_concat(bytes_concat(bytes_concat(bytes_concat(bytes_concat("MatrixRow(", render(p0)), ", "), render(p1)), ", "), render(p2)), ", "), render(p3)), ", "), render(p4)), ")") };
+};
+
+fn eq_MatrixRow(a: MatrixRow, b: MatrixRow) => Binary{1} =
+    match a { MatrixRow(p0, p1, p2, p3, p4) => match b { MatrixRow(q0, q1, q2, q3, q4) => and(and(and(and(bytes_eq(p0, q0), bytes_eq(p1, q1)), bytes_eq(p2, q2)), bytes_eq(p3, q3)), bytes_eq(p4, q4)) } };
